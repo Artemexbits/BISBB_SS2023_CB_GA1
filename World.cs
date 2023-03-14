@@ -11,7 +11,6 @@ class World : IAsciiObject
     private int width;
     private int height;
     public char[,] matrix;
-    private int render_count = 3;
     public Player current_player;
     public World(char[,] matrix)
     {
@@ -26,7 +25,6 @@ class World : IAsciiObject
     }
     public override void render()
     {
-        //if(render_count >= 3) {
         for (int i = 0; i < matrix.GetLength(1); i++)
         {
             for (int j = 0; j < matrix.GetLength(0); j++)
@@ -86,9 +84,6 @@ class World : IAsciiObject
                 Console.ForegroundColor = ConsoleColor.White;
             }
         }
-        // render_count = 0;
-        // }
-        // render_count++;
         current_player.render();
     }
     public static World createFromFile(string filename)

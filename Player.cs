@@ -12,7 +12,7 @@ class Player : IAsciiObject
     private Thread beeperThread;
     private int beep = 0;
     private ConsoleKey lastKey;
-    public Player(World w, char c, double x = 1, double y = 6, double vel = 1.0)
+    public Player(World w, char c, double x = 1, double y = 7, double vel = 1.0)
     {
         this.w = w;
         this.c = c;
@@ -161,7 +161,7 @@ class Player : IAsciiObject
             case 2:
                 Program.current_world = Program.w1;
                 this.w = Program.w1;
-                this.level = 3;
+                this.level = 1;
                 break;
         }
         Program.current_world.current_player = this;

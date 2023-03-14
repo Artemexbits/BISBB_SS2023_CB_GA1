@@ -8,8 +8,8 @@ class Program
     static void Main(string[] args)
     {
         Console.CursorVisible = false;
-        w1 = World.createFromFile("world1.txt");
-        w2 = World.createFromFile("world2.txt");
+        w1 = World.createFromFile("worlds/world1_small.txt");
+        w2 = World.createFromFile("worlds/world2_small.txt");
         Player p1 = new Player(w1, '@');
         w1.current_player = p1;
         current_world = w1;
@@ -20,7 +20,7 @@ class Program
             {
                 current_world.render();
                 current_world.update();
-                Thread.Sleep(20);
+                Thread.Sleep(50);
             }
         }
         catch (Exception)
