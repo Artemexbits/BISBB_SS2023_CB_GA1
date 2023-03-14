@@ -34,6 +34,7 @@ class Program
 
         worlds = new World[w_files.Length];
         for(int i = 0; i < worlds.Length; i++) {
+            Console.WriteLine($"file{i}: " + w_files[i]);
             worlds[i] = World.createFromFile(w_files[i]);
         }
 
