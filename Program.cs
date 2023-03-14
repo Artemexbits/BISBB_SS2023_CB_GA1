@@ -68,17 +68,4 @@ class Program
             Console.Beep(400, 400);
         }
     }
-
-    private static Enemy[] initEnemies(World w) {
-        Enemy[] enemies;
-
-        Enemy e1 = new Enemy(w, 'Z', new (int x, int y)[]{(5, 13), (5, 14), (5, 15), (5, 16), (5, 17), (5, 18)});
-        Enemy e2 = new Enemy(w, 'Z', new (int x, int y)[]{(8, 13), (8, 14), (8, 15), (8, 16), (8, 17), (8, 18)});
-
-
-
-        enemies = new Enemy[] {e1, e2};
-
-        return enemies;
-    }
 }
