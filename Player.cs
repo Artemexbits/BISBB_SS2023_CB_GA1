@@ -1,7 +1,6 @@
 namespace BISBB_SS2023_CB_GA1;
 class Player : AsciiShape, IRenderable
 {
-    public char c;
     private World w;
     public int score = 0;
     public int health = 3;

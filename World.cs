@@ -13,6 +13,7 @@ class World : IRenderable
     private int height;
     public char[,] matrix;
     public Player? current_player;
+    public Enemy? enemy;
     public World(char[,] matrix, (int x, int y) start_pos)
     {
         this.matrix = matrix;
@@ -24,6 +25,7 @@ class World : IRenderable
     public void update()
     {
         current_player!.update();
+        enemy!.update();
     }
     public void render()
     {
@@ -86,6 +88,7 @@ class World : IRenderable
                 Console.ForegroundColor = ConsoleColor.White;
             }
         }
+        enemy!.render();
         current_player!.render();
     }
     public static World createFromFile(string filename, (int x, int y) start_pos)
@@ -120,9 +123,9 @@ class World : IRenderable
                 }
             }
         }
-        catch (Exception)
+        catch (Exception e)
         {
-            Console.WriteLine("ERROR: creating world from file: " + filename + " failed");
+            Console.WriteLine("ERROR: creating world from file: " + filename + " failed \n" + e);
             System.Environment.Exit(1);
         }
         return new World(matrix, start_pos);
