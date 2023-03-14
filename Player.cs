@@ -6,7 +6,6 @@ class Player : AsciiShape, IRenderable
     public int score = 0;
     public int health = 3;
     public int level = 1;
-    private Thread beeperThread;
     private int beep = 0;
     private ConsoleKey lastKey;
     public Player(World w, char c, double x = 1, double y = 7, double vel = 1.0)
@@ -17,7 +16,7 @@ class Player : AsciiShape, IRenderable
         this.y = y;
         this.vel = vel;
 
-        beeperThread = new Thread(new ThreadStart(Beeper));
+        Thread beeperThread = new Thread(new ThreadStart(Beeper));
         beeperThread.Start();
 
         Thread inputThread = new Thread(new ThreadStart(handleInput));
