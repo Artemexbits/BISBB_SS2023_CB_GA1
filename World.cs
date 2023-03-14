@@ -18,7 +18,7 @@ class World : IAsciiObject
         this.matrix = matrix;
         scoreboard_pos = getLastIndexOfSequenceIn2DArray("SCORE: A", matrix);
         healthboard_pos = getLastIndexOfSequenceIn2DArray("LIFE:  A", matrix);
-        levelboard_pos = getLastIndexOfSequenceIn2DArray("LEVEL: A", matrix);
+        levelboard_pos = getLastIndexOfSequenceIn2DArray("WORLD: A", matrix);
     }
     public override void update()
     {
