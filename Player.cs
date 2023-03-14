@@ -83,7 +83,7 @@ class Player : IAsciiObject
                         }
                         else
                         {
-                            yVel = -vel*0.5;
+                            yVel = -vel*0.3;
                             xVel = 0;
                         }
 
@@ -110,7 +110,7 @@ class Player : IAsciiObject
                         }
                         else
                         {
-                            yVel = +vel*0.5;
+                            yVel = +vel*0.3;
                             xVel = 0;
                         }
                         lastKey = ConsoleKey.S;

@@ -1,0 +1,26 @@
+#############
+# SCORE: A  #
+# LIFE:  A  #
+# WORLD: A  #
+#############
+
+######################################################################
+#   #        ZZ        Z    Z       Z               V                #
+#   # ####    ZZ                Z      Z   ZZ     Z V                #
+#   # ######  VZZ      Z    Z       Z  VZ      Z    V                #
+#   #   V  ##  VZZ                Z       Z         V                #
+#   ######  ##  ZZ       Z  Z  Z ZV         Z  Z    V    X  V        #
+#         #  ## ZZ                    ZVZ        Z ZV                #
+#########  #  # ZZ       Z                  Z       V                #
+#ZZZZZ   Z  # # ZZ          Z  Z  Z    ZZ      Z    V     V          #
+#ZV    Z    # # ZZ               ZVZ  Z          Z  V                #
+#Z   ######## # ZZ        Z  Z           Z Z   Z    V                #
+#Z  #    Z  # # ZZ    Z       Z                  Z  V                #
+#  #    Z   # # ZZ      V  Z     Z   Z  ZV   Z      V                #
+# #  Z ZV Z #V# ZZ      Z    Z           Z          V                #
+#   Z  Z Z  # # ZZ                              Z   V                #
+# #Z  Z  Z  # # ZZ     Z        Z   VZ        Z     V                #
+# #  V   Z  # # ZZ           Z             Z        V                #
+#Z######### # # ZZ                Z              ZZ V                #
+#VVVVZVVVVZ   #           Z     Z V   Z   Z   Z     V                #
+######################################################################
