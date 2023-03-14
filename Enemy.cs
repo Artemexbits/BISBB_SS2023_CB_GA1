@@ -24,7 +24,7 @@ class Enemy : AsciiShape, IRenderable {
             (int x, int y) pos = track[track_count];
             x = pos.x;
             y = pos.y;
-
+            //TODO check if track end is connected to track start
             track_count += (int)vel;
             if(track_count+(int)vel >= track.Length || track_count <= 0) {
                 vel *= -1;
