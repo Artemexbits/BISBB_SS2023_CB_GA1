@@ -214,7 +214,6 @@ class World : IRenderable
             {
                 line += array[i, j];
             }
-            //Console.WriteLine(line);
             if (line.Contains(sequence))
             {
                 pos.x = (line.IndexOf(sequence) + sequence.Length - 1);
