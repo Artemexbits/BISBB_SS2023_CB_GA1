@@ -71,65 +71,64 @@ class Player : IAsciiObject
         while (Program.isRunning)
         {
             ConsoleKeyInfo k = Console.ReadKey(true);
-            lock (w)
+            
+            switch (k.Key)
             {
-                switch (k.Key)
-                {
-                    case ConsoleKey.W:
-                        if (lastKey == ConsoleKey.S && yVel != 0)
-                        {
-                            yVel = 0;
-                            xVel = 0;
-                        }
-                        else
-                        {
-                            yVel = -vel*0.3;
-                            xVel = 0;
-                        }
+                case ConsoleKey.W:
+                    if (lastKey == ConsoleKey.S && yVel != 0)
+                    {
+                        yVel = 0;
+                        xVel = 0;
+                    }
+                    else
+                    {
+                        yVel = -vel*0.5;
+                        xVel = 0;
+                    }
 
-                        lastKey = ConsoleKey.W;
-                        break;
-                    case ConsoleKey.A:
-                        if (lastKey == ConsoleKey.D && xVel != 0)
-                        {
-                            yVel = 0;
-                            xVel = 0;
-                        }
-                        else
-                        {
-                            xVel = -vel;
-                            yVel = 0;
-                        }
-                        lastKey = ConsoleKey.A;
-                        break;
-                    case ConsoleKey.S:
-                        if (lastKey == ConsoleKey.W && yVel != 0)
-                        {
-                            yVel = 0;
-                            xVel = 0;
-                        }
-                        else
-                        {
-                            yVel = +vel*0.3;
-                            xVel = 0;
-                        }
-                        lastKey = ConsoleKey.S;
-                        break;
-                    case ConsoleKey.D:
-                        if (lastKey == ConsoleKey.A && xVel != 0)
-                        {
-                            yVel = 0;
-                            xVel = 0;
-                        }
-                        else
-                        {
-                            xVel = +vel;
-                            yVel = 0;
-                        }
-                        lastKey = ConsoleKey.D;
-                        break;
-                }
+                    lastKey = ConsoleKey.W;
+                    break;
+                case ConsoleKey.A:
+                    if (lastKey == ConsoleKey.D && xVel != 0)
+                    {
+                        yVel = 0;
+                        xVel = 0;
+                    }
+                    else
+                    {
+                        xVel = -vel;
+                        yVel = 0;
+                    }
+                    lastKey = ConsoleKey.A;
+                    break;
+                case ConsoleKey.S:
+                    if (lastKey == ConsoleKey.W && yVel != 0)
+                    {
+                        yVel = 0;
+                        xVel = 0;
+                    }
+                    else
+                    {
+                        yVel = +vel*0.5;
+                        xVel = 0;
+                    }
+                    lastKey = ConsoleKey.S;
+                    break;
+                case ConsoleKey.D:
+                    if (lastKey == ConsoleKey.A && xVel != 0)
+                    {
+                        yVel = 0;
+                        xVel = 0;
+                    }
+                    else
+                    {
+                        xVel = +vel;
+                        yVel = 0;
+                    }
+                    lastKey = ConsoleKey.D;
+                    break;
             }
+            
         }
     }
 
