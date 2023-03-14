@@ -13,6 +13,8 @@ class Program
         Menu m = new Menu(2);
         int selection = m.waitForSelection();
         if(selection == Menu.EXIT) {
+            Console.Clear();
+            Console.WriteLine("exit selected");
             System.Environment.Exit(0);
         }else
         if(selection == Menu.INFO) {

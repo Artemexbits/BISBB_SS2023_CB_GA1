@@ -58,7 +58,8 @@ class Menu {
     }
     private void printSelector() {
         Console.Clear();
-        Console.ForegroundColor = ConsoleColor.Blue;
+        ConsoleColor selector_color = ConsoleColor.Blue;
+        Console.ForegroundColor = selector_color;
         for(int i = 0; i < matrix.GetLength(0); i++) {
             for(int j = 0; j < matrix.GetLength(1); j++) {
                 if(i == (option*3-3) || i == (2+option*3-3)) {
@@ -68,6 +69,13 @@ class Menu {
                 if(((option*3-3) < i && i < (2+option*3-3)) && (j == 0 || j == matrix.GetLength(1)-1)) {
                     Console.SetCursorPosition(j, i);
                     Console.Write('#');
+                }
+
+                if(((option*3-3) < i && i < (2+option*3-3)) && j == matrix.GetLength(1)-1) {
+                    Console.SetCursorPosition(j+2, i);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("ENTER");
+                    Console.ForegroundColor = selector_color;
                 }
             }
         }
