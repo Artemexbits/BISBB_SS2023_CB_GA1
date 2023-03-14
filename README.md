@@ -6,9 +6,9 @@
 - enemies placed as 'Z'
 - all neighboring enemies will convert into an array of coordinates i.e. track to move along back and forth
 - coins placed as 'O'
-- portal placed as 'X'
-- one world may contain many portals all having the next common target world
-- by touching 'X' the player teleports to the next world in repeated order
+- exit-portal placed as 'X'
+- entry-portal placed as 'Y'
+- one world may contain many exit-portals all having the next common target world
+- by touching 'X' the player teleports to the next world to the position of the entry-portal 'Y' in repeated order
 - place <yourcustomworld>.txt files inside worlds/ directory
-- the last line of every world.txt file must have a player entry point
-- example: last line -> ```start:1,8``` sets entry point for player to start at the 2nd row and 9th column of this world 
+- every world needs an entry point and exit point!
