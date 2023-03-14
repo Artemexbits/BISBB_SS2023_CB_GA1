@@ -13,7 +13,7 @@ class World : IRenderable
     private int height;
     public char[,] matrix;
     public Player? current_player;
-    public Enemy? enemy;
+    public Enemy[]? enemies;
     public World(char[,] matrix, (int x, int y) start_pos)
     {
         this.matrix = matrix;
@@ -25,7 +25,9 @@ class World : IRenderable
     public void update()
     {
         current_player!.update();
-        enemy!.update();
+        foreach(Enemy e in enemies!) {
+            e.update();
+        }
     }
     public void render()
     {
@@ -88,7 +90,9 @@ class World : IRenderable
                 Console.ForegroundColor = ConsoleColor.White;
             }
         }
-        enemy!.render();
+        foreach(Enemy e in enemies!) {
+            e.render();
+        }
         current_player!.render();
     }
     public static World createFromFile(string filename, (int x, int y) start_pos)

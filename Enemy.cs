@@ -3,12 +3,14 @@ namespace BISBB_SS2023_CB_GA1;
 class Enemy : AsciiShape, IRenderable {
     private World w;
     private (int x, int y)[] track;
-    private int track_count = 0;
+    private int track_count;
     public Enemy(World w, char c, (int x, int y)[] track, double vel = 1.0) {
+        track_count = new Random().Next(track.Length - 2);
+        
         this.w = w;
         this.c = c;
-        this.x = track[0].x;
-        this.y = track[0].y;
+        this.x = track[track_count].x;
+        this.y = track[track_count].y;
         this.vel = vel;
         this.track = track;
     }
