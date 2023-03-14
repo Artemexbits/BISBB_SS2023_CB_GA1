@@ -301,7 +301,6 @@ class World : IRenderable
             if(next == null) {
                 continue;
             }
-            //Console.WriteLine("add at: " + track[^1].x + ", " + track[^1].y);
             if(append_end) {
                 track.AddRange(next);
             } else {
