@@ -5,7 +5,12 @@ class Enemy : AsciiShape, IRenderable {
     private (int x, int y)[] track;
     private int track_count;
     public Enemy(World w, char c, (int x, int y)[] track, double vel = 1.0) {
-        track_count = new Random().Next(track.Length - 2);
+        if(track.Length - 2 > 0) {
+            track_count = new Random().Next(track.Length - 2);
+        } else {
+            track_count = 0;
+        }
+        
         
         this.w = w;
         this.c = c;
@@ -15,13 +20,15 @@ class Enemy : AsciiShape, IRenderable {
         this.track = track;
     }
     public void update() {
-        (int x, int y) pos = track[track_count];
-        x = pos.x;
-        y = pos.y;
+        if(track.Length > 1) {
+            (int x, int y) pos = track[track_count];
+            x = pos.x;
+            y = pos.y;
 
-        track_count += (int)vel;
-        if(track_count+(int)vel >= track.Length || track_count <= 0) {
-             vel *= -1;
+            track_count += (int)vel;
+            if(track_count+(int)vel >= track.Length || track_count <= 0) {
+                vel *= -1;
+            }
         }
     }
     public void render() {

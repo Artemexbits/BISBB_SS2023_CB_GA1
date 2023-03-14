@@ -1,26 +1,26 @@
-#############
-# SCORE: A  #
-# LIFE:  A  #
-# WORLD: A  #
-#############
+##############
+# score:  a  #
+# health: a  #
+# level:  a  #
+##############
 
 ##################################################
-#       Z          #V              #   Z         #
-#       Z ZZZZZZ   #VZZZZZZZ       #   Z         #
-#       Z Z    Z   #Z              #   Z         #
-#       # Z VV Z   #Z   #########  #   Z   #ZZZZZ#
-#       # Z VV Z   #Z   #   V V V  #       #  V  #
-#     V # Z   ZZ  V Z   # ##########ZZZZZZZ#  V  #
-#     VV# ZZZZZ   V Z   #                  #ZZZZZ#
-#     VV#         V Z   #                  #     #
-############################################V V V#
-#    #####      VZ     VZV              VV##ZZZZZ#
-#    Z###Z   Z  #Z      Z  #   Z     ZZ V##      #
-#    ZV#VZ  VZ  #ZZZ    Z  ##  ZZ    Z  ##       #
-#    Z Z Z ZZZ  #       Z   ##  ZZ  ZZ ##        #
-# X  Z Z Z   #######    Z   Z##  ZZVZ ##         #
-#    Z Z Z     V#V      Z   Z ##  ZZZ # ZZZ    ZZ#
-#    ZV#VZ ZZZZ # ZZZ   Z   Z  ##     V   ZZZ  ZV#
-#    Z###Z    Z # Z     Z   Z VV##    V     ZZZZ #
-#    #####    Z   Z    VZV  Z VVV#    V        V #
+#     #   Z   #   Z   Z  Z Z   #       ZZZZZ     #
+#     #   Z   #   Z   Z  Z Z   #    ZZZZ         #
+#     #   Z   #   Z   Z  Z Z   #ZZ  ##########   #
+#     #   Z   #ZZZ###########  # Z##    ZZZ Z    #
+#     #ZZZ#ZZZ#   # ZZ  OOO    # Z##    Z Z Z    #
+#     #   #   #   # Z########### ####   Z ZZZ    #
+#    Z#Z  #   #ZZZ# Z#           ####ZZZ##########
+#    Z Z  #   Z   # Z#   #      ##  ##    ZZZ  ZZ#
+#    Z Z  #   Z   # ZZZZZ#      ##  ##   ZZ Z   Z#
+#    Z Z  #   Z   #      #     ###  ###  Z  ZZ  Z#
+#    Z Z  #   Z   #      #     ##    ## ####### Z#
+#    Z#Z  #   ###############O##########  Z Z Z Z#
+#     #   #   #ZZ       Z   #O##########  Z Z Z  #
+#     #ZZZ#ZZZ#ZOZZ   Z Z   #O###OOOO###  Z Z ZZZ#
+#     #   Z   #ZOXZ   Z Z    ###      ### Z Z    #
+#     #   Z   #ZOZZ   Z Z    ### ZZZ  ### Z ZZZZZ#
+#     #   Z   #ZZ     Z Z    Z     Z      Z      #
+#     #   Z   #         Z    Z  Z  ZZZZ   ZZZZZZZ#
 ##################################################

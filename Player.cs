@@ -50,7 +50,7 @@ class Player : AsciiShape, IRenderable
             nextLevel();
         }
 
-        if (health <= 0 || score >= 10)
+        if (health <= 0 || score >= 50)
         {
             Program.isRunning = false;
         }
@@ -161,5 +161,8 @@ class Player : AsciiShape, IRenderable
         Program.current_world!.current_player = this;
         Program.current_world!.current_player.x = Program.current_world!.start_pos.x;
         Program.current_world!.current_player.y = Program.current_world!.start_pos.y;
+        if (Program.current_world!.current_player.health < 8) {
+            Program.current_world!.current_player.health+=2;
+        }
     }
 }

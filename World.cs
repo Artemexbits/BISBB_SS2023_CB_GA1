@@ -2,7 +2,7 @@ namespace BISBB_SS2023_CB_GA1;
 class World : IRenderable
 {
     public static readonly char WALL = '#';
-    public static readonly char COIN = 'V';
+    public static readonly char COIN = 'O';
     public static readonly char ENEMY = 'Z';
     public static readonly char PORTAL = 'X';
     public readonly (int x, int y) start_pos;
@@ -18,9 +18,9 @@ class World : IRenderable
     {
         this.matrix = matrix;
         this.start_pos = start_pos;
-        scoreboard_pos = getLastIndexOfSequenceIn2DArray("SCORE: A", matrix);
-        healthboard_pos = getLastIndexOfSequenceIn2DArray("LIFE:  A", matrix);
-        levelboard_pos = getLastIndexOfSequenceIn2DArray("WORLD: A", matrix);
+        scoreboard_pos = getLastIndexOfSequenceIn2DArray("score:  a", matrix);
+        healthboard_pos = getLastIndexOfSequenceIn2DArray("health: a", matrix);
+        levelboard_pos = getLastIndexOfSequenceIn2DArray("level:  a", matrix);
     }
     public void update()
     {
@@ -83,8 +83,10 @@ class World : IRenderable
                 {
                     if (!((int)current_player!.x == i && (int)current_player!.y == j))
                     {
-                        Console.SetCursorPosition(i, j);
-                        Console.Write(matrix[j, i]);
+                        if(!(i == scoreboard_pos.x+1 && j == scoreboard_pos.y)) {
+                            Console.SetCursorPosition(i, j);
+                            Console.Write(matrix[j, i]);
+                        }
                     }
                 }
                 Console.ForegroundColor = ConsoleColor.White;

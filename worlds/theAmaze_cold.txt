@@ -1,26 +1,26 @@
-#############
-# SCORE: A  #
-# LIFE:  A  #
-# WORLD: A  #  use W A S D to move
-#############
+##############
+# score:  a  #
+# health: a  #
+# level:  a  #  use W A S D to move
+##############
 
 ##################################################
-#     #   Z   #   Z   Z  Z Z   #       ZZZZZ     #
-#     #   Z   #   Z   Z  Z Z   #    ZZZZ         #
-#     #   Z   #   Z   Z  Z Z   #ZZ  ##########   #
-#     #   Z   #ZZZ###########  # Z##    ZZZ Z    #
-#     #ZZZ#ZZZ#   # ZZ         # Z##    Z Z Z    #
-#     #   #   #   # Z########### ####   Z ZZZ    #
-#    Z#Z  #   #ZZZ# Z#           ####ZZZ##########
-#    Z Z  #   Z   # Z#   #      ##  ##    ZZZ  ZZ#
-#    ZVZ  #   Z   # ZZZZZ#      ##  ##   ZZ Z   Z#
-#    ZVZ  #   Z   #      #     ###  ###  Z  ZZ  Z#
-#    Z Z  #   Z   #      #     ##    ## ####### Z#
-#    Z#Z  #   ############### ##########  Z Z Z Z#
-#     #   #   #ZZ       Z   # ##########  Z Z Z  #
-#     #ZZZ#ZZZ#ZVZZ   Z Z   # ###    ###  Z Z ZZZ#
-#     #   Z   #ZVXZ   Z Z    ###      ### Z Z    #
-#     #   Z   #ZVZZ   Z Z    ### ZZZ  ### Z ZZZZZ#
-#     #   Z   #ZZ     Z Z    Z  ZZ Z      Z      #
-#     #   Z   #         Z    Z  Z  Z      ZZZZZZZ#
+#       Z          #O              #   Z         #
+#       Z ZZZZZZ   #OZZZZZZZ       #   Z         #
+#       Z Z    Z   #Z              #   Z         #
+#       # Z OO Z   #Z   #########  #   Z   #ZZZZZ#
+#       # Z OO Z   #Z   #   O O O  #       #  O  #
+#     O # Z   ZZ  O Z   # ##########ZZZZZZZ#  O  #
+#     OO# ZZZZZ   O Z   #                  #ZZZZZ#
+#     OO#         O Z   #                  #     #
+############################################O O O#
+#    #####      OZ     OZO              OO##ZZZZZ#
+#    Z###Z   Z  #Z      Z  #   Z     ZZ O##      #
+#    ZO#OZ  OZ  #ZZZ    Z  ##  ZZ    Z  ##       #
+#    Z Z Z ZZZ  #       Z   ##  ZZ  ZZ ##        #
+# X  Z Z Z   #######    Z   Z##  ZZOZ ##         #
+#    Z Z Z     O#O      Z   Z ##  ZZZ # ZZZ    ZZ#
+#    ZO#OZ ZZZZ # ZZZ   Z   Z  ##     O   ZZZ  ZO#
+#    Z###Z    Z # Z     Z   Z OO##    O     ZZZZ #
+#    #####    Z   Z    OZO  Z OOO#    O        O #
 ##################################################
