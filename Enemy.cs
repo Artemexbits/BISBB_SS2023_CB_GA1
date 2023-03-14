@@ -13,14 +13,6 @@ class Enemy : AsciiShape, IRenderable {
         this.track = track;
     }
     public void update() {
-        // if (w.matrix[(int)(y + yVel), (int)x] != World.WALL)
-        // {
-        //     y += yVel;
-        // }
-        // if (w.matrix[(int)y, (int)(x + xVel)] != World.WALL)
-        // {
-        //     x += xVel;
-        // }
         (int x, int y) pos = track[track_count];
         x = pos.x;
         y = pos.y;
@@ -31,8 +23,6 @@ class Enemy : AsciiShape, IRenderable {
         }
     }
     public void render() {
-        // Console.SetCursorPosition((int)x, (int)y);
-        // Console.Write(c);
         w.matrix[(int)y, (int)x] = c;
         
         foreach((int x, int y) p in track) {
