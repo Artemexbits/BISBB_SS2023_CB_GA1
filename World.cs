@@ -217,16 +217,17 @@ class World : IRenderable
                 char cell = matrix[i,j];
                 if(cell == 'Z') {
                     (int x, int y) next = (j, i);
-                    //Console.WriteLine($"firstnext: {next.x} {next.y}");
                     while(next != (-1, -1)) {
                         track.Add(next);
                         next = nextNeighbor(track, matrix, next.x, next.y);
-                        //Console.WriteLine($"next: {next.x} {next.y}");
                     }
                     tracks.Add(track);
                 }
             }
         }
+        
+        tracks = mergeTracks(tracks);
+        
         Enemy[] enemies = new Enemy[tracks.Count];
         for(int i = 0; i < tracks.Count; i++) {
             (int x, int y)[] track = tracks[i].ToArray();
@@ -235,7 +236,6 @@ class World : IRenderable
         
         return enemies;
     }
-
     private static bool isInTracks(List<List<(int x, int y)>> tracks, int x, int y) {
         foreach(List<(int x, int y)> track in tracks) {
             if(isTrack(track, x, y)) {
@@ -252,7 +252,7 @@ class World : IRenderable
         }
         return false;
     }
-    private static (int x, int y) nextNeighbor(List<(int x, int y)> track, char[,] matrix, int x, int y) {
+     private static (int x, int y) nextNeighbor(List<(int x, int y)> track, char[,] matrix, int x, int y) {
         if(matrix[y+1, x] == 'Z' && !isTrack(track, x, y+1)) {
             return (x, y+1);
         } else 
@@ -267,5 +267,58 @@ class World : IRenderable
         } else {
             return (-1, -1);
         }
+    }
+    private static List<List<(int x, int y)>> mergeTracks(List<List<(int x, int y)>> tracks) {
+        for(int i = 0; i < tracks.Count; i++) {
+            List<(int x, int y)> track = tracks[i];
+            (List<(int x, int y)> next, bool append_end) = nextTrack(tracks, track);
+            if(next == null) {
+                continue;
+            }
+            Console.WriteLine("add at: " + track[^1].x + ", " + track[^1].y);
+            if(append_end) {
+                track.AddRange(next);
+            } else {
+                tracks.Remove(next);
+                next.AddRange(track);
+                track = next;
+            }
+            tracks[i] = track;      
+        }
+        return tracks;
+    }
+    private static (List<(int x, int y)>, bool) nextTrack(List<List<(int x, int y)>> tracks, List<(int x, int y)> track_a) {
+
+        foreach(List<(int x, int y)> track_b in tracks) {
+            if(track_b == track_a) {
+                continue;
+            }
+
+            if(track_b.Contains((track_a[^1].x, track_a[^1].y+1))) {
+                return (track_b, true);
+            } else 
+            if(track_b.Contains((track_a[^1].x+1, track_a[^1].y))) {
+                return (track_b, true);
+            } else
+            if(track_b.Contains((track_a[^1].x, track_a[^1].y-1))) {
+                return (track_b, true);
+            } else 
+            if(track_b.Contains((track_a[^1].x-1, track_a[^1].y))) {
+                return (track_b, true);
+            } else
+            if(track_b.Contains((track_a[0].x, track_a[0].y+1))) {
+                return (track_b, false);
+            } else 
+            if(track_b.Contains((track_a[0].x+1, track_a[0].y))) {
+                return (track_b, false);
+            } else
+            if(track_b.Contains((track_a[0].x, track_a[0].y-1))) {
+                return (track_b, false);
+            } else 
+            if(track_b.Contains((track_a[0].x-1, track_a[0].y))) {
+                return (track_b, false);
+            }
+        }
+        return (null, false);
     }
 }
