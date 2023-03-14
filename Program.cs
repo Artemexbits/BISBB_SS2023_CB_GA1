@@ -9,6 +9,18 @@ class Program
     public static World[] worlds;
     static void Main(string[] args)
     {   
+        Console.CursorVisible = false;
+        Menu m = new Menu(2);
+        int selection = m.waitForSelection();
+        if(selection == Menu.EXIT) {
+            System.Environment.Exit(0);
+        }else
+        if(selection == Menu.INFO) {
+            Console.Clear();
+            Console.WriteLine("infopage comming soon");
+            System.Environment.Exit(0);
+        }
+
         string[] w_files = new string[0];
         try {
             string w_dir = Directory.GetCurrentDirectory().ToString()+@"\worlds\";
@@ -17,7 +29,6 @@ class Program
             Console.WriteLine("ERROR: dir worlds/ not found");
             System.Environment.Exit(1);
         }
-        Console.CursorVisible = false;
 
         worlds = new World[w_files.Length];
         for(int i = 0; i < worlds.Length; i++) {
