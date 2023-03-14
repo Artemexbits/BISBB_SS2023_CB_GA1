@@ -4,9 +4,6 @@ class Program
     public static bool isRunning = true;
     public static readonly bool IS_MUTE = true;
     public static World? current_world;
-    public static World? w1;
-    public static World? w2;
-
     public static World[] worlds;
     static void Main(string[] args)
     {   
