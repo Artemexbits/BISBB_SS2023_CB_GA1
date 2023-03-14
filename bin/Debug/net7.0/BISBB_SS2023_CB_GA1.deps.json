@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "BISBB_SS2023_CB_GA1/1.0.0": {
+        "runtime": {
+          "BISBB_SS2023_CB_GA1.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BISBB_SS2023_CB_GA1/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
