@@ -7,6 +7,7 @@ class World : IRenderable
     public static readonly char COIN = 'O';
     public static readonly char ENEMY = 'Z';
     public static readonly char PORTAL = 'X';
+    public static readonly char START = 'Y';
     public readonly (int x, int y) start_pos;
     private (int x, int y) scoreboard_pos;
     private (int x, int y) healthboard_pos;
@@ -126,15 +127,18 @@ class World : IRenderable
                     else
                     if (c == -1)
                     {
-                        y++;
                         break;
                     }
                     else
                     {
-                        if(y >= matrix.GetLength(0)-1) {
+                        if(y >= matrix.GetLength(0)) {
                             break;
+                        } else
+                        if(y == start_pos.y && x == start_pos.x) {
+                            matrix[y, x] = ' ';
+                        } else {
+                            matrix[y, x] = (char)c;
                         }
-                        matrix[y, x] = (char)c;
                         x++;
                     }
                 }
@@ -163,7 +167,6 @@ class World : IRenderable
                 int height = 0;
                 int x = 0;
                 int y = 0;
-                string line = "";
                 while (true)
                 {
                     int c = fs.ReadByte();
@@ -175,22 +178,21 @@ class World : IRenderable
                             width = x;
                         }
                         x = 0;
-                        line = "";
                     }
                     else
                     if (c == -1)
                     {
-                        string[] pos_arr = line.Split("start:")[1].Split(",");
-                        start_pos.x = Convert.ToInt32(pos_arr[0]);
-                        start_pos.y = Convert.ToInt32(pos_arr[1]);
                         height = y;
-                        matrix = new char[height, width];
+                        matrix = new char[height+1, width+1];
                         break;
                     }
                     else
                     {
+                        if(c == World.START) {
+                            start_pos.x = x;
+                            start_pos.y = y;
+                        }
                         x++;
-                        line += (char)c;
                     }
                 }
             }
@@ -224,6 +226,7 @@ class World : IRenderable
 
     
     public static Enemy[] detectEnemyTracks(char[,] matrix, World w) {
+        Console.WriteLine("detecting enemy tracks");
         List<List<(int x, int y)>> tracks = new List<List<(int x, int y)>>();
         for(int i = 0; i < matrix.GetLength(0); i++) {
             for(int j = 0; j < matrix.GetLength(1); j++) {
@@ -245,12 +248,14 @@ class World : IRenderable
         
         tracks = mergeTracks(tracks);
 
+        Console.WriteLine($"total tracks: {tracks.Count}");
+
         Enemy[] enemies = new Enemy[tracks.Count];
         for(int i = 0; i < tracks.Count; i++) {
 
             (int x, int y)[] track = tracks[i].Distinct().ToArray();
 
-            enemies[i] = new Enemy(w, 'Z', track);
+            enemies[i] = new Enemy(w, World.ENEMY, track);
         }
         
         return enemies;
@@ -272,16 +277,19 @@ class World : IRenderable
         return false;
     }
      private static (int x, int y) nextNeighbor(List<(int x, int y)> track, char[,] matrix, int x, int y) {
-        if(matrix[y+1, x] == 'Z' && !isTrack(track, x, y+1)) {
+        if(x >= matrix.GetLength(1)-1 || y >= matrix.GetLength(0)-1) {
+            return (-1, -1);
+        }
+        if(matrix[y+1, x] == World.ENEMY && !isTrack(track, x, y+1)) {
             return (x, y+1);
         } else 
-        if(matrix[y, x+1] == 'Z' && !isTrack(track, x+1, y)) {
+        if(matrix[y, x+1] == World.ENEMY && !isTrack(track, x+1, y)) {
             return (x+1, y);
         } else 
-        if(matrix[y-1, x] == 'Z' && !isTrack(track, x, y-1)) {
+        if(matrix[y-1, x] == World.ENEMY && !isTrack(track, x, y-1)) {
             return (x, y-1);
         } else 
-        if(matrix[y, x-1] == 'Z' && !isTrack(track, x-1, y)) {
+        if(matrix[y, x-1] == World.ENEMY && !isTrack(track, x-1, y)) {
             return (x-1, y);
         } else {
             return (-1, -1);

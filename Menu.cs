@@ -51,6 +51,7 @@ class Menu {
             printSelector();
             printItems();
         } while(k.Key != ConsoleKey.Enter);
+        Console.Clear();
         return option;
     }
 

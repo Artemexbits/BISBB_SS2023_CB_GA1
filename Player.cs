@@ -8,7 +8,9 @@ class Player : AsciiShape, IRenderable
     public int health = 9;
     public int level = 1;
     private int beep = 0;
+    private bool pause = false;
     private ConsoleKey lastKey;
+    private Thread inputThread;
     public Player(World w, char c, double x = 1, double y = 7, double vel = 1.0)
     {
         this.w = w;
@@ -20,7 +22,7 @@ class Player : AsciiShape, IRenderable
         Thread beeperThread = new Thread(new ThreadStart(beeper));
         beeperThread.Start();
 
-        Thread inputThread = new Thread(new ThreadStart(handleInput));
+        inputThread = new Thread(new ThreadStart(handleInput));
         inputThread.Start();
     }
 
@@ -66,7 +68,10 @@ class Player : AsciiShape, IRenderable
     private void handleInput()
     {
         while (Program.isRunning)
-        {
+        {   
+            while(pause) {
+                Thread.Sleep(1);
+            }
             ConsoleKeyInfo k = Console.ReadKey(true);
             
             switch (k.Key)
