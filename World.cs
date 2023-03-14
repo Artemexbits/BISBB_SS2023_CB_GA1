@@ -230,7 +230,9 @@ class World : IRenderable
         
         Enemy[] enemies = new Enemy[tracks.Count];
         for(int i = 0; i < tracks.Count; i++) {
-            (int x, int y)[] track = tracks[i].ToArray();
+
+            (int x, int y)[] track = tracks[i].Distinct().ToArray();
+
             enemies[i] = new Enemy(w, 'Z', track);
         }
         
