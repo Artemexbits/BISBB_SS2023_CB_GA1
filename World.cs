@@ -105,10 +105,10 @@ class World : IRenderable
         }
         Console.ForegroundColor = ConsoleColor.White;
     }
-    public static World createFromFile(string filename, (int x, int y) start_pos)
+    public static World createFromFile(string filename)
     {
         
-        char[,] matrix = scanFile(filename);
+        (char[,] matrix, (int x, int y) start_pos) = scanFile(filename);
         try
         {
             using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
@@ -131,6 +131,9 @@ class World : IRenderable
                     }
                     else
                     {
+                        if(y == matrix.GetLength(0)-1) {
+                            break;
+                        }
                         matrix[y, x] = (char)c;
                         x++;
                     }
@@ -148,9 +151,10 @@ class World : IRenderable
         return w;
     }
 
-    private static char[,] scanFile(string filename)
+    private static (char[,], (int, int)) scanFile(string filename)
     {
         char[,] matrix = new char[0, 0];
+        (int x, int y) start_pos = (0, 0);
         try
         {
             using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
@@ -159,6 +163,7 @@ class World : IRenderable
                 int height = 0;
                 int x = 0;
                 int y = 0;
+                string line = "";
                 while (true)
                 {
                     int c = fs.ReadByte();
@@ -170,11 +175,14 @@ class World : IRenderable
                             width = x;
                         }
                         x = 0;
+                        line = "";
                     }
                     else
                     if (c == -1)
                     {
-                        y++;
+                        string[] pos_arr = line.Split("start:")[1].Split(",");
+                        start_pos.x = Convert.ToInt32(pos_arr[0]);
+                        start_pos.y = Convert.ToInt32(pos_arr[1]);
                         height = y;
                         matrix = new char[height, width];
                         break;
@@ -182,15 +190,16 @@ class World : IRenderable
                     else
                     {
                         x++;
+                        line += (char)c;
                     }
                 }
             }
         }
         catch (Exception)
         {
-            return matrix;
+            return (matrix, start_pos);
         }
-        return matrix;
+        return (matrix, start_pos);
     }
 
     private static (int, int) getLastIndexOfSequenceIn2DArray(string sequence, char[,] array)
@@ -223,7 +232,7 @@ class World : IRenderable
                 }
                 List<(int x, int y)> track = new List<(int x, int y)>();
                 char cell = matrix[i,j];
-                if(cell == 'Z') {
+                if(cell == World.ENEMY) {
                     (int x, int y) next = (j, i);
                     while(next != (-1, -1)) {
                         track.Add(next);
