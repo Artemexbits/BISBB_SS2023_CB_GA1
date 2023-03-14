@@ -9,14 +9,12 @@ class Player : IAsciiObject
     public int score = 0;
     public int health = 3;
     public int level = 1;
-    //public char[,] matrix;
     private Thread beeperThread;
     private int beep = 0;
     private ConsoleKey lastKey;
     public Player(World w, char c, double x = 1, double y = 6, double vel = 1.0)
     {
         this.w = w;
-        //this.matrix = matrix;
         this.c = c;
         this.x = x;
         this.y = y;
@@ -66,18 +64,6 @@ class Player : IAsciiObject
     {
         Console.SetCursorPosition((int)x, (int)y);
         Console.Write(c);
-
-        // for (int i = 0; i < matrix.GetLength(1); i++)
-        // {
-        //     for (int j = 0; j < matrix.GetLength(0); j++)
-        //     {
-        //         Console.SetCursorPosition((int)x + i, (int)y + j);
-        //         if (matrix[j, i] != ' ')
-        //         {
-        //             Console.Write(matrix[j, i]);
-        //         }
-        //     }
-        // }
     }
 
     private void handleInput()
@@ -153,8 +139,6 @@ class Player : IAsciiObject
         {
             if (beep == 1)
             {
-                //Console.Beep(400, 400);
-                //Console.Beep(300, 400);
                 Console.Beep(500, 400);
                 beep = 0;
             }
