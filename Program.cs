@@ -9,9 +9,23 @@ class Program
     public static World[] worlds;
     static void Main(string[] args)
     {   
+        string[] w_files = new string[0];
+        try {
+            string w_dir = Directory.GetCurrentDirectory().ToString()+@"\worlds\";
+            w_files = Directory.GetFiles(w_dir, "*.txt");
+        } catch (Exception e) {
+            Console.WriteLine("ERROR: dir worlds/ not found");
+            System.Environment.Exit(1);
+        }
         Console.CursorVisible = false;
-        worlds = new World[] {World.createFromFile("worlds/theAmaze_cold.txt", (1, 8)),
-                              World.createFromFile("worlds/theAmaze_hot.txt", (1, 7))};
+
+        worlds = new World[w_files.Length];
+        for(int i = 0; i < worlds.Length; i++) {
+            worlds[i] = World.createFromFile(w_files[i], (1, 8));
+        }
+
+        // worlds = new World[] {World.createFromFile("worlds/theAmaze_cold.txt", (1, 8)),
+        //                       World.createFromFile("worlds/theAmaze_hot.txt", (1, 7))};
 
         Player p1 = new Player(worlds[0], '@');
         worlds[0].current_player = p1;

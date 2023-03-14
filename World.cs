@@ -139,7 +139,7 @@ class World : IRenderable
         }
         catch (Exception e)
         {
-            Console.WriteLine("ERROR: creating world from file: " + filename + " failed \n" + e);
+            Console.WriteLine("ERROR: creating world from file: " + filename + "\n" + e);
             System.Environment.Exit(1);
         }
         World w =  new World(matrix, start_pos);
@@ -203,7 +203,7 @@ class World : IRenderable
             {
                 line += array[i, j];
             }
-            Console.WriteLine(line);
+            //Console.WriteLine(line);
             if (line.Contains(sequence))
             {
                 pos.x = (line.IndexOf(sequence) + sequence.Length - 1);
@@ -285,7 +285,7 @@ class World : IRenderable
             if(next == null) {
                 continue;
             }
-            Console.WriteLine("add at: " + track[^1].x + ", " + track[^1].y);
+            //Console.WriteLine("add at: " + track[^1].x + ", " + track[^1].y);
             if(append_end) {
                 track.AddRange(next);
             } else {
