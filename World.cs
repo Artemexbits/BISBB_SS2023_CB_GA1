@@ -5,16 +5,18 @@ class World : IRenderable
     public static readonly char COIN = 'V';
     public static readonly char ENEMY = 'Z';
     public static readonly char PORTAL = 'X';
+    public readonly (int x, int y) start_pos;
     private (int x, int y) scoreboard_pos;
-    public (int x, int y) healthboard_pos;
-    public (int x, int y) levelboard_pos;
+    private (int x, int y) healthboard_pos;
+    private (int x, int y) levelboard_pos;
     private int width;
     private int height;
     public char[,] matrix;
     public Player? current_player;
-    public World(char[,] matrix)
+    public World(char[,] matrix, (int x, int y) start_pos)
     {
         this.matrix = matrix;
+        this.start_pos = start_pos;
         scoreboard_pos = getLastIndexOfSequenceIn2DArray("SCORE: A", matrix);
         healthboard_pos = getLastIndexOfSequenceIn2DArray("LIFE:  A", matrix);
         levelboard_pos = getLastIndexOfSequenceIn2DArray("WORLD: A", matrix);
@@ -86,7 +88,7 @@ class World : IRenderable
         }
         current_player!.render();
     }
-    public static World createFromFile(string filename)
+    public static World createFromFile(string filename, (int x, int y) start_pos)
     {
         
         char[,] matrix = scanFile(filename);
@@ -123,7 +125,7 @@ class World : IRenderable
             Console.WriteLine("ERROR: creating world from file: " + filename + " failed");
             System.Environment.Exit(1);
         }
-        return new World(matrix);
+        return new World(matrix, start_pos);
     }
 
     private static char[,] scanFile(string filename)

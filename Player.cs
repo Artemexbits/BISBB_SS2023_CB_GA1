@@ -161,5 +161,7 @@ class Player : AsciiShape, IRenderable
                 break;
         }
         Program.current_world!.current_player = this;
+        Program.current_world!.current_player.x = Program.current_world!.start_pos.x;
+        Program.current_world!.current_player.y = Program.current_world!.start_pos.y;
     }
 }

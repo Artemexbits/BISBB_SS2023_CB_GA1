@@ -8,11 +8,14 @@ class Program
     static void Main(string[] args)
     {
         Console.CursorVisible = false;
-        w1 = World.createFromFile("worlds/level_0.txt");
-        w2 = World.createFromFile("worlds/world1.txt");
+        w1 = World.createFromFile("worlds/world1.txt", (1, 8));
+        w2 = World.createFromFile("worlds/level_0.txt", (1, 7));
         Player p1 = new Player(w1, '@');
         w1.current_player = p1;
         current_world = w1;
+
+        Program.current_world!.current_player.x = Program.current_world!.start_pos.x;
+        Program.current_world!.current_player.y = Program.current_world!.start_pos.y;
         Console.Clear();
         try
         {
