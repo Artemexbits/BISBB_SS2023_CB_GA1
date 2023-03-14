@@ -2,9 +2,9 @@
 class Program
 {
     public static bool isRunning = true;
-    public static World current_world;
-    public static World w1;
-    public static World w2;
+    public static World? current_world;
+    public static World? w1;
+    public static World? w2;
     static void Main(string[] args)
     {
         Console.CursorVisible = false;

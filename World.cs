@@ -1,5 +1,5 @@
 namespace BISBB_SS2023_CB_GA1;
-class World : IAsciiObject
+class World : IRenderable
 {
     public static readonly char WALL = '#';
     public static readonly char COIN = 'V';
@@ -11,7 +11,7 @@ class World : IAsciiObject
     private int width;
     private int height;
     public char[,] matrix;
-    public Player current_player;
+    public Player? current_player;
     public World(char[,] matrix)
     {
         this.matrix = matrix;
@@ -19,11 +19,11 @@ class World : IAsciiObject
         healthboard_pos = getLastIndexOfSequenceIn2DArray("LIFE:  A", matrix);
         levelboard_pos = getLastIndexOfSequenceIn2DArray("WORLD: A", matrix);
     }
-    public override void update()
+    public void update()
     {
-        current_player.update();
+        current_player!.update();
     }
-    public override void render()
+    public void render()
     {
         for (int i = 0; i < matrix.GetLength(1); i++)
         {
@@ -33,19 +33,19 @@ class World : IAsciiObject
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.SetCursorPosition(i, j);
-                    Console.Write(current_player.score);
+                    Console.Write(current_player!.score);
                 }
                 else
                 if (i == healthboard_pos.x && j == healthboard_pos.y)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.SetCursorPosition(i, j);
-                    Console.Write(current_player.health);
+                    Console.Write(current_player!.health);
                 } else
                 if(i == levelboard_pos.x && j == levelboard_pos.y) {
                     Console.ForegroundColor = ConsoleColor.Magenta;
                     Console.SetCursorPosition(i, j);
-                    Console.Write(current_player.level);
+                    Console.Write(current_player!.level);
                 }
                 else
                 if (matrix[j, i] == World.WALL)
@@ -75,7 +75,7 @@ class World : IAsciiObject
                 }
                 else
                 {
-                    if (!((int)current_player.x == i && (int)current_player.y == j))
+                    if (!((int)current_player!.x == i && (int)current_player!.y == j))
                     {
                         Console.SetCursorPosition(i, j);
                         Console.Write(matrix[j, i]);
@@ -84,7 +84,7 @@ class World : IAsciiObject
                 Console.ForegroundColor = ConsoleColor.White;
             }
         }
-        current_player.render();
+        current_player!.render();
     }
     public static World createFromFile(string filename)
     {

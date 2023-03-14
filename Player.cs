@@ -1,11 +1,8 @@
 namespace BISBB_SS2023_CB_GA1;
-class Player : IAsciiObject
+class Player : AsciiShape, IRenderable
 {
     public char c;
     private World w;
-    private double xVel = 0;
-    private double yVel = 0;
-    public double vel;
     public int score = 0;
     public int health = 3;
     public int level = 1;
@@ -27,7 +24,7 @@ class Player : IAsciiObject
         inputThread.Start();
     }
 
-    public override void update()
+    public void update()
     {
         if (w.matrix[(int)(y + yVel), (int)x] != World.WALL)
         {
@@ -60,7 +57,7 @@ class Player : IAsciiObject
             Program.isRunning = false;
         }
     }
-    public override void render()
+    public void render()
     {
         Console.SetCursorPosition((int)x, (int)y);
         Console.Write(c);
@@ -154,15 +151,15 @@ class Player : IAsciiObject
         switch(this.level) {
             case 1:
                 Program.current_world = Program.w2;
-                this.w = Program.w2;
+                this.w = Program.w2!;
                 this.level = 2;
                 break;
             case 2:
                 Program.current_world = Program.w1;
-                this.w = Program.w1;
+                this.w = Program.w1!;
                 this.level = 1;
                 break;
         }
-        Program.current_world.current_player = this;
+        Program.current_world!.current_player = this;
     }
 }
