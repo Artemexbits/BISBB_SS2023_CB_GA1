@@ -16,7 +16,7 @@ class Player : AsciiShape, IRenderable
         this.y = y;
         this.vel = vel;
 
-        Thread beeperThread = new Thread(new ThreadStart(Beeper));
+        Thread beeperThread = new Thread(new ThreadStart(beeper));
         beeperThread.Start();
 
         Thread inputThread = new Thread(new ThreadStart(handleInput));
@@ -128,7 +128,7 @@ class Player : AsciiShape, IRenderable
         }
     }
 
-    private void Beeper()
+    private void beeper()
     {
         while (Program.isRunning)
         {
