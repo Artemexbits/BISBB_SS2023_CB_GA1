@@ -1,7 +1,7 @@
 # run publish.bat to release the project to an .exe file
 # released .exe file can be found in bin\Release\net7.0\win-x64\publish
 
-#How to create worlds?
+# How to create worlds?
 1. every world needs an infoboard and a playing area enclosed by walls as '#' -> see examples in worlds/
 2. enemies placed as 'Z'
    all neighboring enemies will convert into an array of coordinates i.e. track to move along back and forth
