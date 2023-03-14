@@ -14,5 +14,5 @@
 - example:
   ``` 
   worlds = new World[] {World.createFromFile("worlds/<yourcustomworld1>.txt", (1, 8)),
-                      World.createFromFile("worlds/<yourcustomworld2>.txt", (1, 7))};
+                        World.createFromFile("worlds/<yourcustomworld2>.txt", (1, 7))};
   ```
