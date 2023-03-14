@@ -148,23 +148,36 @@ class Player : AsciiShape, IRenderable
     }
 
     private void nextLevel() {
-        switch(this.level) {
-            case 1:
-                Program.current_world = Program.w2;
-                this.w = Program.w2!;
-                this.level = 2;
-                break;
-            case 2:
-                Program.current_world = Program.w1;
-                this.w = Program.w1!;
-                this.level = 1;
-                break;
+        if(this.level <= 0) {
+            return;
+        } else
+        if(this.level >= Program.worlds.Length) {
+            this.level = 0;
         }
+        this.level++;
+        Program.current_world = Program.worlds[level-1];
+        this.w = Program.worlds[level-1];
+        
         Program.current_world!.current_player = this;
         Program.current_world!.current_player.x = Program.current_world!.start_pos.x;
         Program.current_world!.current_player.y = Program.current_world!.start_pos.y;
+
         if (Program.current_world!.current_player.health < 8) {
             Program.current_world!.current_player.health+=2;
         }
+        
+        // switch(this.level) {
+        //     case 1:  
+        //         Program.current_world = Program.w2;
+        //         this.w = Program.w2!;
+        //         this.level = 2;
+        //         break;
+        //     case 2:
+        //         Program.current_world = Program.w1;
+        //         this.w = Program.w1!;
+        //         this.level = 1;
+        //         break;
+        // }
+        
     }
 }

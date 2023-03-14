@@ -6,19 +6,20 @@ class Program
     public static World? current_world;
     public static World? w1;
     public static World? w2;
+
+    public static World[] worlds;
     static void Main(string[] args)
     {   
         Console.CursorVisible = false;
-        w1 = World.createFromFile("worlds/theAmaze_cold.txt", (1, 8));
-        w2 = World.createFromFile("worlds/theAmaze_hot.txt", (1, 7));
+        worlds = new World[] {World.createFromFile("worlds/theAmaze_cold.txt", (1, 8)),
+                              World.createFromFile("worlds/theAmaze_hot.txt", (1, 7))};
 
-        Player p1 = new Player(w1, '@');
+        Player p1 = new Player(worlds[0], '@');
+        worlds[0].current_player = p1;
+        current_world = worlds[0];
 
-        w1.current_player = p1;
-        current_world = w1;
-
-        Program.current_world!.current_player.x = Program.current_world!.start_pos.x;
-        Program.current_world!.current_player.y = Program.current_world!.start_pos.y;
+        Program.current_world!.current_player!.x = Program.current_world!.start_pos.x;
+        Program.current_world!.current_player!.y = Program.current_world!.start_pos.y;
         Console.Clear();
         try
         {

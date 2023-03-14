@@ -36,67 +36,72 @@ class World : IRenderable
         {
             for (int j = 0; j < matrix.GetLength(0); j++)
             {
-                if (i == scoreboard_pos.x && j == scoreboard_pos.y)
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.SetCursorPosition(i, j);
-                    Console.Write(current_player!.score);
-                }
-                else
-                if (i == healthboard_pos.x && j == healthboard_pos.y)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.SetCursorPosition(i, j);
-                    Console.Write(current_player!.health);
-                } else
-                if(i == levelboard_pos.x && j == levelboard_pos.y) {
-                    Console.ForegroundColor = ConsoleColor.Magenta;
-                    Console.SetCursorPosition(i, j);
-                    Console.Write(current_player!.level);
-                }
-                else
-                if (matrix[j, i] == World.WALL)
-                {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.SetCursorPosition(i, j);
-                    Console.Write(matrix[j, i]);
-                }
-                else
-                if (matrix[j, i] == World.ENEMY)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.SetCursorPosition(i, j);
-                    Console.Write(matrix[j, i]);
-                }
-                else
-                if (matrix[j, i] == World.COIN)
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.SetCursorPosition(i, j);
-                    Console.Write(matrix[j, i]);
-                }else
-                if(matrix[j, i] == World.PORTAL) {
-                    Console.ForegroundColor = ConsoleColor.Magenta;
-                    Console.SetCursorPosition(i, j);
-                    Console.Write(matrix[j, i]);
-                }
-                else
-                {
-                    if (!((int)current_player!.x == i && (int)current_player!.y == j))
-                    {
-                        if(!(i == scoreboard_pos.x+1 && j == scoreboard_pos.y)) {
-                            Console.SetCursorPosition(i, j);
-                            Console.Write(matrix[j, i]);
-                        }
-                    }
-                }
-                Console.ForegroundColor = ConsoleColor.White;
+                drawCell(i, j);
             }
         }
+
         foreach(Enemy e in enemies!) {
             e.render();
         }
         current_player!.render();
+    }
+
+    private void drawCell(int i, int j) {
+        if (i == scoreboard_pos.x && j == scoreboard_pos.y)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.SetCursorPosition(i, j);
+            Console.Write(current_player!.score);
+        }
+        else
+        if (i == healthboard_pos.x && j == healthboard_pos.y)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.SetCursorPosition(i, j);
+            Console.Write(current_player!.health);
+        } else
+        if(i == levelboard_pos.x && j == levelboard_pos.y) {
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.SetCursorPosition(i, j);
+            Console.Write(current_player!.level);
+        }
+        else
+        if (matrix[j, i] == World.WALL)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.SetCursorPosition(i, j);
+            Console.Write(matrix[j, i]);
+        }
+        else
+        if (matrix[j, i] == World.ENEMY)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.SetCursorPosition(i, j);
+            Console.Write(matrix[j, i]);
+        }
+        else
+        if (matrix[j, i] == World.COIN)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.SetCursorPosition(i, j);
+            Console.Write(matrix[j, i]);
+        }else
+        if(matrix[j, i] == World.PORTAL) {
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.SetCursorPosition(i, j);
+            Console.Write(matrix[j, i]);
+        }
+        else
+        {
+            if (!((int)current_player!.x == i && (int)current_player!.y == j))
+            {
+                if(!(i == scoreboard_pos.x+1 && j == scoreboard_pos.y)) {
+                    Console.SetCursorPosition(i, j);
+                    Console.Write(matrix[j, i]);
+                }
+            }
+        }
+        Console.ForegroundColor = ConsoleColor.White;
     }
     public static World createFromFile(string filename, (int x, int y) start_pos)
     {
@@ -136,7 +141,7 @@ class World : IRenderable
             System.Environment.Exit(1);
         }
         World w =  new World(matrix, start_pos);
-        Enemy[] enemies = createEnemies(matrix, w);
+        Enemy[] enemies = detectEnemyTracks(matrix, w);
         w.enemies = enemies;
         return w;
     }
@@ -207,7 +212,7 @@ class World : IRenderable
     }
 
     
-    public static Enemy[] createEnemies(char[,] matrix, World w) {
+    public static Enemy[] detectEnemyTracks(char[,] matrix, World w) {
         List<List<(int x, int y)>> tracks = new List<List<(int x, int y)>>();
         for(int i = 0; i < matrix.GetLength(0); i++) {
             for(int j = 0; j < matrix.GetLength(1); j++) {
