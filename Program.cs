@@ -10,7 +10,7 @@ class Program
     static void Main(string[] args)
     {   
         Console.CursorVisible = false;
-        Menu m = new Menu(2);
+        Menu m = new Menu(new[]{"START", "INFO", "EXIT"}, option: 2, selector_h: 5);
         int selection = m.waitForSelection();
         if(selection == Menu.EXIT) {
             Console.Clear();
