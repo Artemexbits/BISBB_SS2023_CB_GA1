@@ -1,20 +1,26 @@
+#############
+# SCORE: A  #
+# LIFE:  A  #
+# WORLD: A  #  use W A S D to move
+#############
+
 ##################################################
-#     #   Z   #   Z   Z  ZZZ   #       ZZZZZ     #
-#     #   Z   #   Z   Z  ZZZ   #    ZZZZ         #
-#     #   Z   #   Z   Z  ZZZ   #ZZ  ##########   #
+#     #   Z   #   Z   Z  Z Z   #       ZZZZZ     #
+#     #   Z   #   Z   Z  Z Z   #    ZZZZ         #
+#     #   Z   #   Z   Z  Z Z   #ZZ  ##########   #
 #     #   Z   #ZZZ###########  # Z##    ZZZ Z    #
 #     #ZZZ#ZZZ#   # ZZ         # Z##    Z Z Z    #
 #     #   #   #   # Z########### ####   Z ZZZ    #
-#    Z#Z  #   #ZZZ# Z#           #### ZZ##########
-#    Z Z  #   Z   # Z#   #      ##  ##     Z   Z #
-#    ZVZ  #   Z   # ZZZZZ#      ##  ##    Z Z Z Z#
-#    ZVZ  #   Z   #      #     ###  ###  Z   Z  Z#
+#    Z#Z  #   #ZZZ# Z#           ####ZZZ##########
+#    Z Z  #   Z   # Z#   #      ##  ##    ZZZ  ZZ#
+#    ZVZ  #   Z   # ZZZZZ#      ##  ##   ZZ Z   Z#
+#    ZVZ  #   Z   #      #     ###  ###  Z  ZZ  Z#
 #    Z Z  #   Z   #      #     ##    ## ####### Z#
 #    Z#Z  #   ############### ##########  Z Z Z Z#
 #     #   #   #ZZ       Z   # ##########  Z Z Z  #
 #     #ZZZ#ZZZ#ZVZZ   Z Z   # ###    ###  Z Z ZZZ#
-#     #   Z   #ZVXZ   Z Z    ###   Z  ### Z Z    #
-#     #   Z   #ZVZZ   Z Z    ###  Z Z ### Z ZZZZZ#
-#     #   Z   #ZZ     Z Z    Z   Z Z Z    Z      #
-#     #   Z   #         Z    Z  Z  Z  Z   ZZZZZZZ#
+#     #   Z   #ZVXZ   Z Z    ###      ### Z Z    #
+#     #   Z   #ZVZZ   Z Z    ### ZZZ  ### Z ZZZZZ#
+#     #   Z   #ZZ     Z Z    Z  ZZ Z      Z      #
+#     #   Z   #         Z    Z  Z  Z      ZZZZZZZ#
 ##################################################

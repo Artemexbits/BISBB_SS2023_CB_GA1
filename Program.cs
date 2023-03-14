@@ -8,22 +8,10 @@ class Program
     static void Main(string[] args)
     {   
         Console.CursorVisible = false;
-        w1 = World.createFromFile("worlds/test/world1.txt", (1, 8));
-        w2 = World.createFromFile("worlds/test/level_0.txt", (1, 7));
-
-        (int x, int y)[] e1_1_track = {(5, 9), (6, 9), (7, 9), (8, 9), (8, 10), (8, 11), (9, 11), (10, 11)};
-        Enemy e1_1 = new Enemy(w1, 'Z', e1_1_track);
-
-        (int x, int y)[] e1_2_track = {(5, 8), (5, 9), (5, 10), (5, 11), (4, 11), (3, 11), (2, 11), (1, 11), (1, 12)};
-        Enemy e1_2 = new Enemy(w2, 'Z', e1_2_track);
-
-        (int x, int y)[] e2_2_track = {(1, 13), (2, 13), (3, 13), (4, 13), (5, 13)};
-        Enemy e2_2 = new Enemy(w2, 'Z', e2_2_track);
+        w1 = World.createFromFile("worlds/theAmaze_cold.txt", (1, 8));
+        w2 = World.createFromFile("worlds/theAmaze_hot.txt", (1, 7));
 
         Player p1 = new Player(w1, '@');
-
-        w1.enemies = new Enemy[]{e1_1};
-        w2.enemies = new Enemy[]{e1_2, e2_2};
 
         w1.current_player = p1;
         current_world = w1;
@@ -57,7 +45,7 @@ class Program
                 playLosingBeep();
             }
             else
-            if (current_world.current_player.score >= 10)
+            if (current_world.current_player.score >= 50)
             {
                 Console.WriteLine("You won!");
                 playWinningBeep();
@@ -76,5 +64,18 @@ class Program
         Console.Beep(500, 400);
         Console.Beep(300, 400);
         Console.Beep(400, 400);
+    }
+
+    private static Enemy[] initEnemies(World w) {
+        Enemy[] enemies;
+
+        Enemy e1 = new Enemy(w, 'Z', new (int x, int y)[]{(5, 13), (5, 14), (5, 15), (5, 16), (5, 17), (5, 18)});
+        Enemy e2 = new Enemy(w, 'Z', new (int x, int y)[]{(8, 13), (8, 14), (8, 15), (8, 16), (8, 17), (8, 18)});
+
+
+
+        enemies = new Enemy[] {e1, e2};
+
+        return enemies;
     }
 }

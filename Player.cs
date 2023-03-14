@@ -3,7 +3,7 @@ class Player : AsciiShape, IRenderable
 {
     private World w;
     public int score = 0;
-    public int health = 3;
+    public int health = 9;
     public int level = 1;
     private int beep = 0;
     private ConsoleKey lastKey;

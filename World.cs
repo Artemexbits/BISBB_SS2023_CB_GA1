@@ -132,7 +132,10 @@ class World : IRenderable
             Console.WriteLine("ERROR: creating world from file: " + filename + " failed \n" + e);
             System.Environment.Exit(1);
         }
-        return new World(matrix, start_pos);
+        World w =  new World(matrix, start_pos);
+        Enemy[] enemies = createEnemies(matrix, w);
+        w.enemies = enemies;
+        return w;
     }
 
     private static char[,] scanFile(string filename)
@@ -198,5 +201,69 @@ class World : IRenderable
             }
         }
         return pos;
+    }
+
+    
+    public static Enemy[] createEnemies(char[,] matrix, World w) {
+        List<List<(int x, int y)>> tracks = new List<List<(int x, int y)>>();
+        for(int i = 0; i < matrix.GetLength(0); i++) {
+            for(int j = 0; j < matrix.GetLength(1); j++) {
+                if(isInTracks(tracks, j, i)) {
+                    continue;
+                }
+                List<(int x, int y)> track = new List<(int x, int y)>();
+                char cell = matrix[i,j];
+                if(cell == 'Z') {
+                    (int x, int y) next = (j, i);
+                    //Console.WriteLine($"firstnext: {next.x} {next.y}");
+                    while(next != (-1, -1)) {
+                        track.Add(next);
+                        next = nextNeighbor(track, matrix, next.x, next.y);
+                        //Console.WriteLine($"next: {next.x} {next.y}");
+                    }
+                    tracks.Add(track);
+                }
+            }
+        }
+        Enemy[] enemies = new Enemy[tracks.Count];
+        for(int i = 0; i < tracks.Count; i++) {
+            (int x, int y)[] track = tracks[i].ToArray();
+            enemies[i] = new Enemy(w, 'Z', track);
+        }
+        
+        return enemies;
+    }
+
+    private static bool isInTracks(List<List<(int x, int y)>> tracks, int x, int y) {
+        foreach(List<(int x, int y)> track in tracks) {
+            if(isTrack(track, x, y)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    private static bool isTrack(List<(int x, int y)> track, int x, int y) {
+        foreach((int x, int y) pos in track) {
+            if(pos.x == x && pos.y == y) {
+                return true;
+            }
+        }
+        return false;
+    }
+    private static (int x, int y) nextNeighbor(List<(int x, int y)> track, char[,] matrix, int x, int y) {
+        if(matrix[y+1, x] == 'Z' && !isTrack(track, x, y+1)) {
+            return (x, y+1);
+        } else 
+        if(matrix[y, x+1] == 'Z' && !isTrack(track, x+1, y)) {
+            return (x+1, y);
+        } else 
+        if(matrix[y-1, x] == 'Z' && !isTrack(track, x, y-1)) {
+            return (x, y-1);
+        } else 
+        if(matrix[y, x-1] == 'Z' && !isTrack(track, x-1, y)) {
+            return (x-1, y);
+        } else {
+            return (-1, -1);
+        }
     }
 }
