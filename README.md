@@ -8,11 +8,7 @@
 - coins placed as 'O'
 - portal placed as 'X'
 - one world may contain many portals all having the next common target world
-- by touching 'X' the player teleports to the next world in repeated order defined in Program.cs
-- place <yourcustomworld>.txt inside worlds/ directory
-- inside Program.cs set new array containing paths to custom worlds and player starting positions (x, y) beginning at index 0
-- example:
-  ``` 
-  worlds = new World[] {World.createFromFile("worlds/<yourcustomworld1>.txt", (1, 8)),
-                        World.createFromFile("worlds/<yourcustomworld2>.txt", (1, 7))};
-  ```
+- by touching 'X' the player teleports to the next world in repeated order
+- place <yourcustomworld>.txt files inside worlds/ directory
+- the last line of every world.txt file must have a player entry point
+- example: last line -> ```start:1,8``` sets entry point for player to start at the 2nd row and 9th column of this world 
