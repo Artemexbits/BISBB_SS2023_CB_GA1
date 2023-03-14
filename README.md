@@ -12,5 +12,7 @@
 5. place <yourcustomworld>.txt inside worlds/ directory
 6. inside Program.cs set new array containing paths to custom worlds and player starting positions (x, y) beginning at index 0
 example:
-  worlds = new World[] {World.createFromFile("worlds/<yourcustomworld1>.txt", (1, 8)),
-                        World.createFromFile("worlds/<yourcustomworld2>.txt", (1, 7))};
+``` 
+worlds = new World[] {World.createFromFile("worlds/<yourcustomworld1>.txt", (1, 8)),
+                      World.createFromFile("worlds/<yourcustomworld2>.txt", (1, 7))};
+```
