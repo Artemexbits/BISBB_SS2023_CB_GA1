@@ -2,6 +2,7 @@
 class Program
 {
     public static bool isRunning = true;
+    public static readonly bool IS_MUTE = true;
     public static World? current_world;
     public static World? w1;
     public static World? w2;
@@ -55,15 +56,19 @@ class Program
 
     private static void playWinningBeep()
     {
-        Console.Beep(400, 400);
-        Console.Beep(300, 400);
-        Console.Beep(500, 400);
+        if(!IS_MUTE) {
+            Console.Beep(400, 400);
+            Console.Beep(300, 400);
+            Console.Beep(500, 400);
+        }
     }
     private static void playLosingBeep()
     {
-        Console.Beep(500, 400);
-        Console.Beep(300, 400);
-        Console.Beep(400, 400);
+        if(!IS_MUTE) {
+            Console.Beep(500, 400);
+            Console.Beep(300, 400);
+            Console.Beep(400, 400);
+        }
     }
 
     private static Enemy[] initEnemies(World w) {

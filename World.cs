@@ -25,6 +25,7 @@ class World : IRenderable
     public void update()
     {
         current_player!.update();
+
         foreach(Enemy e in enemies!) {
             e.update();
         }
@@ -227,7 +228,7 @@ class World : IRenderable
         }
         
         tracks = mergeTracks(tracks);
-        
+
         Enemy[] enemies = new Enemy[tracks.Count];
         for(int i = 0; i < tracks.Count; i++) {
 

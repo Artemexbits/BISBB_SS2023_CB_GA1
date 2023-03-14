@@ -131,12 +131,14 @@ class Player : AsciiShape, IRenderable
     {
         while (Program.isRunning)
         {
+            if(Program.IS_MUTE) {
+                beep = 0;
+            } else
             if (beep == 1)
-            {
+            {   
                 Console.Beep(500, 400);
                 beep = 0;
-            }
-            else
+            } else
             if (beep == 2)
             {
                 Console.Beep(300, 400);
