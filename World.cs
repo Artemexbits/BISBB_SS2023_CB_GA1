@@ -109,6 +109,7 @@ class World : IRenderable
     {
         
         (char[,] matrix, (int x, int y) start_pos) = scanFile(filename);
+        Console.WriteLine("d1: " + matrix.GetLength(0) + ", d2:" + matrix.GetLength(1));
         try
         {
             using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
