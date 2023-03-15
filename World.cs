@@ -17,6 +17,7 @@ class World : IRenderable
     public char[,] matrix;
     public Player? current_player;
     public Enemy[]? enemies;
+    public List<Coin>? coins;
     public World(char[,] matrix, (int x, int y) start_pos)
     {
         this.matrix = matrix;
@@ -29,8 +30,11 @@ class World : IRenderable
     {
         current_player!.update();
 
-        foreach(Enemy e in enemies!) {
-            e.update();
+        foreach(Enemy enemy in enemies!) {
+            enemy.update();
+        }
+        foreach(Coin coin in coins!) {
+            coin.update();
         }
     }
     public void render()
@@ -43,9 +47,13 @@ class World : IRenderable
             }
         }
 
-        foreach(Enemy e in enemies!) {
-            e.render();
+        foreach(Enemy enemy in enemies!) {
+            enemy.render();
         }
+        foreach(Coin coin in coins!) {
+            coin.render();
+        }
+
         current_player!.render();
     }
 
@@ -75,36 +83,36 @@ class World : IRenderable
             Console.SetCursorPosition(i, j);
             Console.Write(matrix[j, i]);
         }
-        else
-        if (matrix[j, i] == World.ENEMY)
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.SetCursorPosition(i, j);
-            Console.Write(matrix[j, i]);
-        }
-        else
-        if (matrix[j, i] == World.COIN)
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.SetCursorPosition(i, j);
-            Console.Write(matrix[j, i]);
-        }else
         if(matrix[j, i] == World.PORTAL) {
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.SetCursorPosition(i, j);
             Console.Write(matrix[j, i]);
         }
         else
+        if(notAnyBoardPos(j, i, scoreboard_pos) && notAnyBoardPos(j, i, healthboard_pos) && notAnyBoardPos(j, i, levelboard_pos))
         {
-            if (!((int)current_player!.x == i && (int)current_player!.y == j))
-            {
-                if(!(i == scoreboard_pos.x+1 && j == scoreboard_pos.y)) {
-                    Console.SetCursorPosition(i, j);
-                    Console.Write(matrix[j, i]);
-                }
+            if (matrix[j, i] == World.ENEMY) {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.SetCursorPosition(i, j);
+                Console.Write(matrix[j, i]);
+            } else
+            if (matrix[j, i] == World.COIN) {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.SetCursorPosition(i, j);
+                Console.Write(matrix[j, i]);
+            } else {
+                Console.SetCursorPosition(i, j);
+                Console.Write(matrix[j, i]);
             }
         }
         Console.ForegroundColor = ConsoleColor.White;
+    }
+
+    private bool notAnyBoardPos(int j, int i, (int x, int y) pos) {
+        if (!(i == pos.x+1 && j == pos.y) && !(i == pos.x && j == pos.y)) {
+            return true;
+        }
+        return false;
     }
     public static World createFromFile(string filename)
     {
@@ -151,7 +159,10 @@ class World : IRenderable
         }
         World w =  new World(matrix, start_pos);
         Enemy[] enemies = detectEnemyTracks(matrix, w);
+        List<Coin> coins = detectCoins(matrix, w);
+    
         w.enemies = enemies;
+        w.coins = coins;
         return w;
     }
 
@@ -223,8 +234,20 @@ class World : IRenderable
         return pos;
     }
 
+    private static List<Coin> detectCoins(char[,] matrix, World w) {
+        List<Coin> coins = new List<Coin>();
+        for(int i = 0; i < matrix.GetLength(0); i++) {
+            for(int j = 0; j < matrix.GetLength(1); j++) {
+                if(matrix[i, j] == World.COIN) {
+                    coins.Add(new Coin(w, World.COIN, j, i));
+                }
+            }
+        }
+        return coins;
+    }
+
     
-    public static Enemy[] detectEnemyTracks(char[,] matrix, World w) {
+    private static Enemy[] detectEnemyTracks(char[,] matrix, World w) {
         Console.WriteLine("detecting enemy tracks");
         List<List<(int x, int y)>> tracks = new List<List<(int x, int y)>>();
         for(int i = 0; i < matrix.GetLength(0); i++) {

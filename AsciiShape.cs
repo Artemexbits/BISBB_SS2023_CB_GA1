@@ -9,4 +9,18 @@ abstract class AsciiShape {
     public double vel;
     protected double xVel = 0;
     protected double yVel = 0;
+    protected bool isCollision(AsciiShape shape) {
+        if((int)this.x == (int)shape.x && (int)this.y == (int)shape.y) {
+            return true;
+        }
+        return false;
+    }
+    protected bool isCollision(AsciiShape[] shapes) {
+        foreach(AsciiShape shape in shapes) {
+            if((int)this.x == (int)shape.x && (int)this.y == (int)shape.y) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

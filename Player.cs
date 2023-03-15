@@ -11,6 +11,8 @@ class Player : AsciiShape, IRenderable
     private bool pause = false;
     private ConsoleKey lastKey;
     private Thread inputThread;
+    private Thread beeperThread;
+    public (double x, double y) lastPos;
     public Player(World w, char c, double x = 1, double y = 7, double vel = 1.0)
     {
         this.w = w;
@@ -19,7 +21,7 @@ class Player : AsciiShape, IRenderable
         this.y = y;
         this.vel = vel;
 
-        Thread beeperThread = new Thread(new ThreadStart(beeper));
+        beeperThread = new Thread(new ThreadStart(beeper));
         beeperThread.Start();
 
         inputThread = new Thread(new ThreadStart(handleInput));
@@ -28,6 +30,9 @@ class Player : AsciiShape, IRenderable
 
     public void update()
     {
+        lastPos.x = x;
+        lastPos.y = y;
+
         if (w.matrix[(int)(y + yVel), (int)x] != World.WALL)
         {
             y += yVel;
@@ -37,22 +42,22 @@ class Player : AsciiShape, IRenderable
             x += xVel;
         }
 
-        if (w.matrix[(int)y, (int)x] == World.COIN)
+        if (grabCoin())
         {
-            w.matrix[(int)y, (int)x] = ' ';
             score++;
             beep = 1;
         }
-        if (w.matrix[(int)y, (int)x] == World.ENEMY)
+        if (isCollision(w.enemies!))
         {
-            w.matrix[(int)y, (int)x] = ' ';
             health--;
             beep = 2;
         }
         if(w.matrix[(int)y, (int)x] == World.PORTAL) {
             Console.Clear();
+            w.matrix[(int)lastPos.y, (int)lastPos.x] = ' ';
             nextLevel();
         }
+
 
         if (health <= 0 || score >= 50)
         {
@@ -61,8 +66,8 @@ class Player : AsciiShape, IRenderable
     }
     public void render()
     {
-        Console.SetCursorPosition((int)x, (int)y);
-        Console.Write(c);
+        w.matrix[(int)lastPos.y, (int)lastPos.x] = ' ';
+        w.matrix[(int)y, (int)x] = c;
     }
 
     private void handleInput()
@@ -172,5 +177,15 @@ class Player : AsciiShape, IRenderable
         if (Program.current_world!.current_player.health < 8) {
             Program.current_world!.current_player.health+=2;
         }
+    }
+
+    private bool grabCoin() {
+        for(int i = 0; i < w.coins!.Count; i++) {
+            if((int)this.x == (int)w.coins[i].x && (int)this.y == (int)w.coins[i].y) {
+                w.coins.RemoveAt(i);
+                return true;
+            }
+        }
+        return false; 
     }
 }

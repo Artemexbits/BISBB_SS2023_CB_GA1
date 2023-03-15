@@ -49,8 +49,8 @@ class Program
         {
             while (isRunning)
             {
-                current_world.render();
                 current_world.update();
+                current_world.render();
                 Thread.Sleep(50);
             }
         }
