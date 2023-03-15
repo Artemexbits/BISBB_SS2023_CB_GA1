@@ -83,13 +83,6 @@ class Menu {
                     Console.SetCursorPosition(j, i);
                     Console.Write('#');
                 }
-
-                // if(((option*selector_h-selector_h) < i && i < ((selector_h-1)+option*selector_h-selector_h)) && j == matrix.GetLength(1)-1) {
-                //     Console.SetCursorPosition(j+2, i);
-                //     Console.ForegroundColor = ConsoleColor.Green;
-                //     Console.Write("ENTER");
-                //     Console.ForegroundColor = selector_color;
-                // }
             }
         }
         Console.ForegroundColor = ConsoleColor.White;
