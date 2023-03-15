@@ -1,18 +1,18 @@
 // Copyright (c) 2023 Artemexbits. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 namespace BISBB_SS2023_CB_GA1;
-class Player : AsciiShape, IRenderable
+class Player : AsciiShape, IRenderable, IDisposable
 {
-    private World w;
     public int score = 0;
     public int health = 9;
     public int level = 1;
+    public (double x, double y) lastPos;
     private int beep = 0;
     private bool pause = false;
+    private World w;
     private ConsoleKey lastKey;
     private Thread inputThread;
     private Thread beeperThread;
-    public (double x, double y) lastPos;
     public Player(World w, char c, double x = 1, double y = 7, double vel = 1.0)
     {
         this.w = w;
@@ -187,5 +187,11 @@ class Player : AsciiShape, IRenderable
             }
         }
         return false; 
+    }
+
+    public void Dispose()
+    {
+        beeperThread.Join();
+        inputThread.Join();
     }
 }

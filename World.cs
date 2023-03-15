@@ -9,15 +9,15 @@ class World : IRenderable
     public static readonly char PORTAL = 'X';
     public static readonly char START = 'Y';
     public readonly (int x, int y) start_pos;
+    public char[,] matrix;
+    public Player? current_player;
+    public Enemy[]? enemies;
+    public List<Coin>? coins;
     private (int x, int y) scoreboard_pos;
     private (int x, int y) healthboard_pos;
     private (int x, int y) levelboard_pos;
     private int width;
     private int height;
-    public char[,] matrix;
-    public Player? current_player;
-    public Enemy[]? enemies;
-    public List<Coin>? coins;
     public World(char[,] matrix, (int x, int y) start_pos)
     {
         this.matrix = matrix;
@@ -33,9 +33,11 @@ class World : IRenderable
         foreach(Enemy enemy in enemies!) {
             enemy.update();
         }
-        foreach(Coin coin in coins!) {
-            coin.update();
-        }
+        
+        // nothing to update yet
+        // foreach(Coin coin in coins!) {
+        //     coin.update();
+        // }
     }
     public void render()
     {
@@ -89,7 +91,6 @@ class World : IRenderable
             Console.Write(matrix[j, i]);
         }
         else
-        if(notAnyBoardPos(j, i, scoreboard_pos) && notAnyBoardPos(j, i, healthboard_pos) && notAnyBoardPos(j, i, levelboard_pos))
         {
             if (matrix[j, i] == World.ENEMY) {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -100,15 +101,18 @@ class World : IRenderable
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.SetCursorPosition(i, j);
                 Console.Write(matrix[j, i]);
-            } else {
-                Console.SetCursorPosition(i, j);
-                Console.Write(matrix[j, i]);
             }
+        }
+
+        //Below condition ensures that the placeholder for each of the boards is not rendered and the positions for the actual value stay free
+        if(notBoard(j, i, scoreboard_pos) && notBoard(j, i, healthboard_pos) && notBoard(j, i, levelboard_pos)) {
+            Console.SetCursorPosition(i, j);
+            Console.Write(matrix[j, i]);
         }
         Console.ForegroundColor = ConsoleColor.White;
     }
 
-    private bool notAnyBoardPos(int j, int i, (int x, int y) pos) {
+    private bool notBoard(int j, int i, (int x, int y) pos) {
         if (!(i == pos.x+1 && j == pos.y) && !(i == pos.x && j == pos.y)) {
             return true;
         }

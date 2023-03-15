@@ -3,9 +3,6 @@
 namespace BISBB_SS2023_CB_GA1;
 
 class Menu {
-    public static readonly short START = 1;
-    public static readonly short INFO = 2;
-    public static readonly short EXIT = 3;
     private int option;
     private int selector_w;
     private int selector_h;
@@ -26,7 +23,7 @@ class Menu {
     private void initItems(string[] items) {
         this.items = new (string text, int x, int y)[items.Length];
         for(int i = 0; i < items.Length; i++) {
-            this.items[i] = (items[i], item_margin_left, (selector_h/2)+selector_h*i);
+            this.items[i] = (items[i], (selector_w)/2-(items[i].Length)/2, (selector_h/2)+selector_h*i);
         }
     }
     public int waitForSelection() {

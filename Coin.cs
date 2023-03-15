@@ -4,7 +4,7 @@ namespace BISBB_SS2023_CB_GA1;
 
 class Coin : AsciiShape, IRenderable {
 
-    public World w;
+    private World w;
     public Coin(World w, char c, double x = 1, double y = 7) {
         this.c = c;
         this.x = x;
