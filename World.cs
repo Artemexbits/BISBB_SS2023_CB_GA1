@@ -8,6 +8,8 @@ class World : IRenderable
     public static readonly char ENEMY = 'Z';
     public static readonly char PORTAL = 'X';
     public static readonly char START = 'Y';
+    public static readonly char SPACE = ' ';
+    public static short frametime = 1;
     public readonly (int x, int y) start_pos;
     public char[,] matrix;
     public Player? current_player;
@@ -16,6 +18,7 @@ class World : IRenderable
     private (int x, int y) scoreboard_pos;
     private (int x, int y) healthboard_pos;
     private (int x, int y) levelboard_pos;
+    private (int x, int y) frameboard_pos;
     private int width;
     private int height;
     public World(char[,] matrix, (int x, int y) start_pos)
@@ -25,6 +28,7 @@ class World : IRenderable
         scoreboard_pos = getLastIndexOfSequenceIn2DArray("score:  a", matrix);
         healthboard_pos = getLastIndexOfSequenceIn2DArray("health: a", matrix);
         levelboard_pos = getLastIndexOfSequenceIn2DArray("level:  a", matrix);
+        frameboard_pos = getLastIndexOfSequenceIn2DArray("frame:  a", matrix);
     }
     public void update()
     {
@@ -59,7 +63,38 @@ class World : IRenderable
         current_player!.render();
     }
 
+    public void init() {
+        for (int i = 0; i < matrix.GetLength(1); i++)
+        {
+            for (int j = 0; j < matrix.GetLength(0); j++)
+            {
+                colorizedOutput(i, j);
+            }
+        }
+    }
+
     private void drawCell(int i, int j) {
+        if(matrix[j, i] != World.WALL || matrix[j, i] != World.SPACE) {
+            colorizedOutput(i, j);
+        }
+
+        //Below condition ensures that the placeholder for each of the boards is not rendered and the positions for the actual value stay free
+        if(notBoard(j, i, scoreboard_pos) && notBoard(j, i, healthboard_pos) && notBoard(j, i, levelboard_pos) && notBoard(j, i, frameboard_pos)) {
+            if(matrix[j, i] == World.WALL) Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.SetCursorPosition(i, j);
+            Console.Write(matrix[j, i]);
+        }
+        Console.ForegroundColor = ConsoleColor.White;
+    }
+
+    private void colorizedOutput(int i, int j) {
+        if (i == frameboard_pos.x && j == frameboard_pos.y && frameboard_pos != (0, 0))
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.SetCursorPosition(i, j);
+            Console.Write(World.frametime);
+        }
+        else
         if (i == scoreboard_pos.x && j == scoreboard_pos.y)
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -103,17 +138,10 @@ class World : IRenderable
                 Console.Write(matrix[j, i]);
             }
         }
-
-        //Below condition ensures that the placeholder for each of the boards is not rendered and the positions for the actual value stay free
-        if(notBoard(j, i, scoreboard_pos) && notBoard(j, i, healthboard_pos) && notBoard(j, i, levelboard_pos)) {
-            Console.SetCursorPosition(i, j);
-            Console.Write(matrix[j, i]);
-        }
-        Console.ForegroundColor = ConsoleColor.White;
     }
 
     private bool notBoard(int j, int i, (int x, int y) pos) {
-        if (!(i == pos.x+1 && j == pos.y) && !(i == pos.x && j == pos.y)) {
+        if (!(i == pos.x+2 && j == pos.y) && !(i == pos.x+1 && j == pos.y) && !(i == pos.x && j == pos.y)) {
             return true;
         }
         return false;

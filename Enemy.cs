@@ -22,6 +22,7 @@ class Enemy : AsciiShape, IRenderable {
         this.track = track;
     }
     public void update() {
+        //TODO next-neighbour-movement mechanism
         if(track.Length > 1) {
             (int x, int y) pos = track[track_count];
             x = pos.x;

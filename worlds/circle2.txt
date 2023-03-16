@@ -1,0 +1,36 @@
+##############
+# frame:  a  #
+# score:  a  #
+# health: a  #
+# level:  a  #
+##############
+                      ################                      
+                 #####O       Y      O#####                 
+             ####  OOO#              #    Z####             
+           ##ZZZZ  OXO#              #    Z    ##           
+         ## OZZZZ  OOO#ZZZZZZZZZZZZZZ#    Z      ##         
+       ##   OZZZZ     #              #    Z        ##       
+     ##   #############ZZZZZZZZZZZZZZ#    ZZZZZZZZZZ ##     
+    ##  Z ZZZ ZZZ ZZZ #   ########   #ZZZZ##########  ##    
+   #O   Z  OZ  OZ  OZ #   Z      Z   #  O #  Z Z Z Z    #   
+  #ZZZZZZ   Z   Z   Z #   Z  OO  Z   # O  #  ZOZOZOZ     #  
+ #################### #   Z  OO  Z   #  O #  Z Z Z Z     ## 
+ #  Z Z Z Z Z Z Z Z Z #   Z      Z   # O  #OO############## 
+#   ZOZOZOZOZOZOZOZOZ O######  ######O  O #            Z OO#
+#   Z Z Z Z Z Z Z Z Z #ZZZZZ#  #       O  # ZZZZ ZZZZ  Z OO#    
+# #####################ZOOO##  ##         # Z    Z     Z OO#
+#   Z  Z        Z Z ZO#ZOO##ZZZZ##ZZZZZZZZ# ZZZ ZZ ZZZ Z OO#
+#   Z  Z OOOOO  Z Z Z #ZO##      ##       #ZZZZ ZZ ZZZ Z OO#
+#   Z  Z O#O#O  Z Z Z #Z##ZZZZZZZZ##      #ZZ    Z     Z   #
+ #  Z  Z O#O#O  Z Z Z #Z#                 # ZZZZ ZZZZ  Z  # 
+ ## Z  Z OOOOO  Z Z Z #Z#  OOO       OOO  #            Z ## 
+  # Z   #     # Z Z Z #Z#    OOOOOOOOO    #ZZZZZZZZZZZ Z #  
+   #Z    ##### Z Z Z  #Z#############################  Z#   
+    ##ZZZZZZZZZZZZZZZZ#Z                              ##    
+     ##O             O#ZO O O    O O O    O O O      ##     
+       ##ZZZZZZZZZZZZZ#Z#########################OO##       
+         ##O          #ZZZZZZ  O  Z Z  Z Z   OOOO##         
+           ##ZZZZZZZZZ##       Z  Z Z Z Z    OO##           
+             ####OOOOO  ZZZZ   O  Z Z      ####             
+                 #####     Z   Z  Z Z #####                 
+                      ################                      

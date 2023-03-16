@@ -1,6 +1,7 @@
 ﻿// Copyright (c) 2023 Artemexbits. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 namespace BISBB_SS2023_CB_GA1;
+using System.Diagnostics;
 class Program
 {
     public static bool isRunning = true;
@@ -52,68 +53,77 @@ class Program
             try
             {
                 DateTime begin_time = DateTime.Now;
+                Program.current_world.init();
+                Stopwatch watch = new Stopwatch();
+                //int time_count = 0;
                 while (isRunning)
                 {
+                    watch.Start();
                     current_world.update();
                     current_world.render();
-                    Thread.Sleep(50);
+                    watch.Stop();
+                    World.frametime = (short)watch.Elapsed.TotalMilliseconds;
+                    watch.Reset();
                 }
                 DateTime end_time = DateTime.Now;
 
                 time_alive = (end_time-begin_time).Duration().TotalSeconds;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 Console.Clear();
-                Console.WriteLine("matrix length0:" + current_world.matrix.GetLength(0));
-                Console.WriteLine("matrix length1:" + current_world.matrix.GetLength(1));
-                Console.WriteLine("last y pos: " + current_world.current_player.y);
-                Console.WriteLine("last x pos: " + current_world.current_player.x);
+                // Console.WriteLine("matrix length0:" + current_world.matrix.GetLength(0));
+                // Console.WriteLine("matrix length1:" + current_world.matrix.GetLength(1));
+                // Console.WriteLine("last y pos: " + current_world.current_player.y);
+                // Console.WriteLine("last x pos: " + current_world.current_player.x);
+                // Console.WriteLine("ERROR: " + e);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("ERROR: your console window is probably too small to play this world!");
+                Console.ForegroundColor = ConsoleColor.White;
                 Thread.Sleep(3000);
                 playAgain = false;
-                break;
+                continue;
             }
-            finally
+            
+            Console.Clear();
+            if (current_world.current_player.health <= 0)
             {
-                Console.Clear();
-                if (current_world.current_player.health <= 0)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("YOU FAILED!");
-                    playLosingBeep();
-                }
-                else
-                if (current_world.current_player.score >= 50)
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("YOU WON!");
-                    playWinningBeep();
-                }else
-                if (current_world.current_player.health != 0)
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("YOU WON!");
-                    playWinningBeep();
-                }
-                Console.ForegroundColor = ConsoleColor.White;
-
-                Thread.Sleep(1000);
-                
-                Menu end_menu = new Menu(new[]{"RESTART", "STATS", "EXIT"}, option: 2, selector_h: 5);
-                int end_selection = end_menu.waitForSelection();
-                
-                if(end_selection == 1) {
-                    playAgain = true;
-                } else
-                if(end_selection == 3) {
-                    playAgain = false;
-                } else
-                if(end_selection == 2) {
-                    Console.Clear();
-                    printStats(current_world.current_player.score, current_world.current_player.health, current_world.current_player.level, time_alive);
-                    playAgain = false;
-                }
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("YOU FAILED!");
+                playLosingBeep();
             }
+            else
+            if (current_world.current_player.score >= 50)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("YOU WON!");
+                playWinningBeep();
+            }else
+            if (current_world.current_player.health != 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("YOU WON!");
+                playWinningBeep();
+            }
+            Console.ForegroundColor = ConsoleColor.White;
+
+            Thread.Sleep(1000);
+            
+            Menu end_menu = new Menu(new[]{"RESTART", "STATS", "EXIT"}, option: 2, selector_h: 5);
+            int end_selection = end_menu.waitForSelection();
+            
+            if(end_selection == 1) {
+                playAgain = true;
+            } else
+            if(end_selection == 3) {
+                playAgain = false;
+            } else
+            if(end_selection == 2) {
+                Console.Clear();
+                printStats(current_world.current_player.score, current_world.current_player.health, current_world.current_player.level, time_alive);
+                playAgain = false;
+            }
+            
         }
     }
 
