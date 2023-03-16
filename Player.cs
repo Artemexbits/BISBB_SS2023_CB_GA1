@@ -33,11 +33,11 @@ class Player : AsciiShape, IRenderable, IDisposable
         lastPos.x = x;
         lastPos.y = y;
 
-        if (w.matrix[(int)(y + yVel), (int)x] != World.WALL)
+        if ((int)(y + yVel) >= 0 && (int)(y + yVel) < w.matrix.GetLength(0) && w.matrix[(int)(y + yVel), (int)x] != World.WALL)
         {
             y += yVel;
         }
-        if (w.matrix[(int)y, (int)(x + xVel)] != World.WALL)
+        if ((int)(x + xVel) >= 0 && (int)(x + xVel) < w.matrix.GetLength(1) && w.matrix[(int)y, (int)(x + xVel)] != World.WALL)
         {
             x += xVel;
         }
@@ -164,18 +164,20 @@ class Player : AsciiShape, IRenderable, IDisposable
             return;
         } else
         if(this.level >= Program.worlds.Length) {
-            this.level = 0;
-        }
-        this.level++;
-        Program.current_world = Program.worlds[level-1];
-        this.w = Program.worlds[level-1];
-        
-        Program.current_world!.current_player = this;
-        Program.current_world!.current_player.x = Program.current_world!.start_pos.x;
-        Program.current_world!.current_player.y = Program.current_world!.start_pos.y;
+            //this.level = 0;
+            Program.isRunning = false;
+        } else {
+            this.level++;
+            Program.current_world = Program.worlds[level-1];
+            this.w = Program.worlds[level-1];
 
-        if (Program.current_world!.current_player.health < 8) {
-            Program.current_world!.current_player.health+=2;
+            Program.current_world!.current_player = this;
+            Program.current_world!.current_player.x = Program.current_world!.start_pos.x;
+            Program.current_world!.current_player.y = Program.current_world!.start_pos.y;
+
+            if (Program.current_world!.current_player.health < 8) {
+                Program.current_world!.current_player.health+=2;
+            }
         }
     }
 

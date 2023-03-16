@@ -4,7 +4,7 @@ namespace BISBB_SS2023_CB_GA1;
 class Program
 {
     public static bool isRunning = true;
-    public static readonly bool IS_MUTE = true;
+    public static readonly bool IS_MUTE = false;
     public static World? current_world;
     public static World[] worlds;
     static void Main(string[] args)
@@ -84,6 +84,12 @@ class Program
                 }
                 else
                 if (current_world.current_player.score >= 50)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("YOU WON!");
+                    playWinningBeep();
+                }else
+                if (current_world.current_player.health != 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("YOU WON!");

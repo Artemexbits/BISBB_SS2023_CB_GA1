@@ -1,0 +1,26 @@
+##############
+# score:  a  #
+# health: a  #
+# level:  a  #  use W A S D to move
+##############
+                                                                           
+                                        
+              ############              
+         ######     Y    ######         
+       ###                    ###        
+     ###                        ###     
+    ##                            ##    
+  ###ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ###  
+  #       OO       OO       OO       #  
+ ##ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ## 
+ #        OO       OO       OO        # 
+ #ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ# 
+ ##       OO       OO       OO       ## 
+  #ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ#  
+  ###     OO       OO       OO     ###  
+    ##ZZZZZZZZZZZZZZZZZZZZZZZZZZZZ##    
+     ###  OO                OO  ###     
+       ###ZZZZZZZZZZZZZZZZZZZZ###       
+         ######  OOXXOO  ######         
+              ############              
+                                        
