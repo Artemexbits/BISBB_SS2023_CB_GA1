@@ -63,6 +63,10 @@ class Program
                     current_world.render();
                     watch.Stop();
                     World.frametime = (short)watch.Elapsed.TotalMilliseconds;
+                    int diff = 100 -World.frametime;
+                    if(diff > 0) {
+                        Thread.Sleep(diff);
+                    }
                     watch.Reset();
                 }
                 DateTime end_time = DateTime.Now;
