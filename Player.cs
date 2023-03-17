@@ -30,8 +30,7 @@ class Player : AsciiShape, IRenderable, IDisposable
 
     public void update()
     {
-        lastPos.x = x;
-        lastPos.y = y;
+        lastPos = (x, y);
 
         if ((int)(y + yVel) >= 0 && (int)(y + yVel) < w.matrix.GetLength(0) && w.matrix[(int)(y + yVel), (int)x] != World.WALL)
         {
@@ -178,6 +177,7 @@ class Player : AsciiShape, IRenderable, IDisposable
             if (Program.current_world!.current_player.health < 8) {
                 Program.current_world!.current_player.health+=2;
             }
+            Program.current_world.init();
         }
     }
 

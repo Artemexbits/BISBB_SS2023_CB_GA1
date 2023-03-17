@@ -69,46 +69,50 @@ class World : IRenderable
             for (int j = 0; j < matrix.GetLength(0); j++)
             {
                 colorizedOutput(i, j);
+
+                Console.SetCursorPosition(i, j);
+                Console.Write(matrix[j, i]);
             }
         }
     }
 
     private void drawCell(int i, int j) {
-        if(matrix[j, i] != World.WALL || matrix[j, i] != World.SPACE) {
+        if(matrix[j, i] != World.WALL && matrix[j, i] != World.SPACE) {
             colorizedOutput(i, j);
         }
 
         //Below condition ensures that the placeholder for each of the boards is not rendered and the positions for the actual value stay free
-        if(notBoard(j, i, scoreboard_pos) && notBoard(j, i, healthboard_pos) && notBoard(j, i, levelboard_pos) && notBoard(j, i, frameboard_pos)) {
-            if(matrix[j, i] == World.WALL) Console.ForegroundColor = ConsoleColor.Yellow;
+        if(notBoard(j, i, scoreboard_pos) && notBoard(j, i, healthboard_pos) && notBoard(j, i, levelboard_pos) && notBoard(j, i, frameboard_pos) && matrix[j, i] != World.WALL) {//&& ((int)current_player!.x, (int)current_player!.y) != (i, j) && (current_player!.lastPos.x, current_player!.lastPos.y) != (i, j)) {
+            
             Console.SetCursorPosition(i, j);
             Console.Write(matrix[j, i]);
+            //colorizedOutput(i, j);
         }
         Console.ForegroundColor = ConsoleColor.White;
     }
 
     private void colorizedOutput(int i, int j) {
-        if (i == frameboard_pos.x && j == frameboard_pos.y && frameboard_pos != (0, 0))
+        if ((i, j) == (frameboard_pos.x, frameboard_pos.y) && frameboard_pos != (0, 0))
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.SetCursorPosition(i, j);
             Console.Write(World.frametime);
         }
         else
-        if (i == scoreboard_pos.x && j == scoreboard_pos.y)
+        if ((i, j) == (scoreboard_pos.x, scoreboard_pos.y))
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.SetCursorPosition(i, j);
             Console.Write(current_player!.score);
         }
         else
-        if (i == healthboard_pos.x && j == healthboard_pos.y)
+        if ((i, j) == (healthboard_pos.x, healthboard_pos.y))
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.SetCursorPosition(i, j);
             Console.Write(current_player!.health);
         } else
-        if(i == levelboard_pos.x && j == levelboard_pos.y) {
+        if((i, j) == (levelboard_pos.x, levelboard_pos.y)) {
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.SetCursorPosition(i, j);
             Console.Write(current_player!.level);
@@ -117,25 +121,17 @@ class World : IRenderable
         if (matrix[j, i] == World.WALL)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.SetCursorPosition(i, j);
-            Console.Write(matrix[j, i]);
         }
         if(matrix[j, i] == World.PORTAL) {
             Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.SetCursorPosition(i, j);
-            Console.Write(matrix[j, i]);
         }
         else
         {
             if (matrix[j, i] == World.ENEMY) {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.SetCursorPosition(i, j);
-                Console.Write(matrix[j, i]);
             } else
             if (matrix[j, i] == World.COIN) {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.SetCursorPosition(i, j);
-                Console.Write(matrix[j, i]);
             }
         }
     }

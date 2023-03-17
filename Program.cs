@@ -54,6 +54,7 @@ class Program
             {
                 DateTime begin_time = DateTime.Now;
                 Program.current_world.init();
+                
                 Stopwatch watch = new Stopwatch();
                 //int time_count = 0;
                 while (isRunning)
