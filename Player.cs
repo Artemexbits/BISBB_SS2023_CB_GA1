@@ -4,6 +4,7 @@ namespace BISBB_SS2023_CB_GA1;
 class Player : AsciiShape, IRenderable, IDisposable
 {
     public int score = 0;
+    public readonly int max_score;
     public int health = 9;
     public int level = 1;
     public (double x, double y) lastPos;
@@ -13,10 +14,11 @@ class Player : AsciiShape, IRenderable, IDisposable
     private ConsoleKey lastKey;
     private Thread inputThread;
     private Thread beeperThread;
-    public Player(World w, char c, double x = 1, double y = 7, double vel = 1.0)
+    public Player(World w, char c, int max_score, double x = 1, double y = 7, double vel = 1.0)
     {
         this.w = w;
         this.c = c;
+        this.max_score = max_score;
         this.x = x;
         this.y = y;
         this.vel = vel;
@@ -58,7 +60,7 @@ class Player : AsciiShape, IRenderable, IDisposable
         }
 
 
-        if (health <= 0 || score >= 50)
+        if (health <= 0 || score >= max_score)
         {
             Program.isRunning = false;
         }

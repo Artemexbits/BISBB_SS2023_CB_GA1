@@ -96,7 +96,7 @@ class World : IRenderable
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.SetCursorPosition(i, j);
-            Console.Write(World.frametime);
+            Console.Write(World.frametime.ToString("000"));
         }
         else
         if ((i, j) == (scoreboard_pos.x, scoreboard_pos.y))

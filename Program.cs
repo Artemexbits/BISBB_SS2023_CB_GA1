@@ -42,7 +42,7 @@ class Program
                 worlds[i] = World.createFromFile(w_files[i]);
             }
 
-            Player p1 = new Player(worlds[0], '@');
+            Player p1 = new Player(worlds[0], '@', 100);
             worlds[0].current_player = p1;
             current_world = worlds[0];
 
@@ -54,7 +54,7 @@ class Program
             {
                 DateTime begin_time = DateTime.Now;
                 Program.current_world.init();
-                
+
                 Stopwatch watch = new Stopwatch();
                 //int time_count = 0;
                 while (isRunning)
@@ -98,7 +98,7 @@ class Program
                 playLosingBeep();
             }
             else
-            if (current_world.current_player.score >= 50)
+            if (current_world.current_player.score >= current_world.current_player.max_score)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("YOU WON!");
@@ -112,7 +112,7 @@ class Program
             }
             Console.ForegroundColor = ConsoleColor.White;
 
-            Thread.Sleep(1000);
+            //Thread.Sleep(1000);
             
             Menu end_menu = new Menu(new[]{"RESTART", "STATS", "EXIT"}, option: 2, selector_h: 5);
             int end_selection = end_menu.waitForSelection();
