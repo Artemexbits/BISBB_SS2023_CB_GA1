@@ -318,7 +318,7 @@ class World : IRenderable
         }
         return false;
     }
-    private static bool isTrack(List<(int x, int y)> track, int x, int y) {
+    public static bool isTrack(List<(int x, int y)> track, int x, int y) {
         foreach((int x, int y) pos in track) {
             if(pos.x == x && pos.y == y) {
                 return true;
