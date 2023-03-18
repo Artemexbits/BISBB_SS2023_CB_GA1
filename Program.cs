@@ -13,8 +13,10 @@ class Program
         Console.CursorVisible = false;
         bool playAgain = true;
 
-        Menu start_menu = new Menu(new[]{"START", "INFO", "EXIT"}, option: 2, selector_h: 5);
+        Menu start_menu = new Menu(new[]{"START", "INFO", "EXIT"}, option: 2, selector_h: 3);
         int start_selection = start_menu.waitForSelection();
+
+
         Console.Clear();
         if(start_selection == 3) {
             Console.WriteLine("exit selected");
