@@ -15,10 +15,10 @@ class Enemy : AsciiShape, IRenderable {
         }
         
         this.w = w;
-        this.c = c;
-        this.x = track[track_count].x;
-        this.y = track[track_count].y;
-        this.vel = vel;
+        base.c = c;
+        base.x = track[track_count].x;
+        base.y = track[track_count].y;
+        base.vel = vel;
         this.track = track;
     }
     public void update() {

@@ -17,11 +17,11 @@ class Player : AsciiShape, IRenderable, IDisposable
     public Player(World w, char c, int max_score, double x = 1, double y = 7, double vel = 1.0)
     {
         this.w = w;
-        this.c = c;
+        base.c = c;
         this.max_score = max_score;
-        this.x = x;
-        this.y = y;
-        this.vel = vel;
+        base.x = x;
+        base.y = y;
+        base.vel = vel;
 
         beeperThread = new Thread(new ThreadStart(beeper));
         beeperThread.Start();

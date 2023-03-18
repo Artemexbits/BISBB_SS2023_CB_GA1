@@ -6,9 +6,9 @@ class Coin : AsciiShape, IRenderable {
 
     private World w;
     public Coin(World w, char c, double x = 1, double y = 7) {
-        this.c = c;
-        this.x = x;
-        this.y = y;
+        base.c = c;
+        base.x = x;
+        base.y = y;
         this.w = w;
     }
 
