@@ -6,19 +6,15 @@ class Menu {
     private int option;
     private int selector_w;
     private int selector_h;
-    private int item_margin_left;
     private (string text, int x, int y)[] items;
     private char[,] matrix;
-    private int last_option;
 
-    public Menu(string[] items, int option = 1, int selector_w = 15, int selector_h = 3, int item_margin_left = 5) {
+    public Menu(string[] items, int option = 1, int selector_w = 15, int selector_h = 3) {
         this.option = option;
         this.selector_w = selector_w;
         this.selector_h = selector_h;
-        this.item_margin_left = item_margin_left;
         initItems(items);
-        last_option = items!.Length;
-        matrix = new char[last_option*selector_h, selector_w];
+        matrix = new char[items!.Length*selector_h, selector_w];
     }
     private void initItems(string[] items) {
         this.items = new (string text, int x, int y)[items.Length];
@@ -35,7 +31,7 @@ class Menu {
             k = Console.ReadKey(true);
             switch(k.Key) {
                 case ConsoleKey.S:
-                    if(option < last_option) {
+                    if(option < items.Length) {
                         option++;
                     }
                     break;

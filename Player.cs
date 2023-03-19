@@ -1,7 +1,7 @@
 // Copyright (c) 2023 Artemexbits. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 namespace BISBB_SS2023_CB_GA1;
-class Player : AsciiShape, IRenderable, IDisposable
+class Player : AsciiShape, IRenderable
 {
     public int score = 0;
     public readonly int max_score;
@@ -23,7 +23,7 @@ class Player : AsciiShape, IRenderable, IDisposable
         base.y = y;
         base.vel = vel;
 
-        beeperThread = new Thread(new ThreadStart(beeper));
+        beeperThread = new Thread(new ThreadStart(handleBeep));
         beeperThread.Start();
 
         inputThread = new Thread(new ThreadStart(handleInput));
@@ -140,7 +140,7 @@ class Player : AsciiShape, IRenderable, IDisposable
         }
     }
 
-    private void beeper()
+    private void handleBeep()
     {
         while (Program.isRunning)
         {
@@ -191,11 +191,5 @@ class Player : AsciiShape, IRenderable, IDisposable
             }
         }
         return false; 
-    }
-
-    public void Dispose()
-    {
-        beeperThread.Join();
-        inputThread.Join();
     }
 }

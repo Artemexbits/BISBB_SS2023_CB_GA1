@@ -186,7 +186,7 @@ class World : IRenderable
             System.Environment.Exit(1);
         }
         World w =  new World(matrix, start_pos);
-        Enemy[] enemies = detectEnemyTracks(matrix, w);
+        Enemy[] enemies = detectEnemies(matrix, w);
         List<Coin> coins = detectCoins(matrix, w);
     
         w.enemies = enemies;
@@ -275,7 +275,7 @@ class World : IRenderable
     }
 
     
-    private static Enemy[] detectEnemyTracks(char[,] matrix, World w) {
+    private static Enemy[] detectEnemies(char[,] matrix, World w) {
         Console.WriteLine("detecting enemy tracks");
         List<List<(int x, int y)>> tracks = new List<List<(int x, int y)>>();
         for(int i = 0; i < matrix.GetLength(0); i++) {

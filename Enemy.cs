@@ -6,7 +6,6 @@ class Enemy : AsciiShape, IRenderable {
     private World w;
     private (int x, int y)[] track;
     private int track_count;
-    private short direction = 0;
     public Enemy(World w, char c, (int x, int y)[] track, double vel = 1.0) {
         if(track.Length - 2 > 0) {
             track_count = new Random().Next(track.Length - 2);
