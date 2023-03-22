@@ -243,7 +243,7 @@ public class World : IRenderable
         return (matrix, start_pos);
     }
 
-    private static (int, int) getLastIndexOfSequenceIn2DArray(string sequence, char[,] array)
+    public static (int, int) getLastIndexOfSequenceIn2DArray(string sequence, char[,] array)
     {
         (int x, int y) pos = (0, 0);
         for (int i = 0; i < array.GetLength(0); i++)
@@ -253,7 +253,7 @@ public class World : IRenderable
             {
                 line += array[i, j];
             }
-            if (line.Contains(sequence))
+            if (line.Contains(sequence) && sequence.Length-1 >= 0)
             {
                 pos.x = (line.IndexOf(sequence) + sequence.Length - 1);
                 pos.y = i;
