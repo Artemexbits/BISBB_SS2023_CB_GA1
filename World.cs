@@ -21,7 +21,7 @@ public class World : IRenderable
     private (int x, int y) frameboard_pos;
     private int width;
     private int height;
-    public World(char[,] matrix, (int x, int y) start_pos)
+    private World(char[,] matrix, (int x, int y) start_pos)
     {
         this.matrix = matrix;
         this.start_pos = start_pos;
