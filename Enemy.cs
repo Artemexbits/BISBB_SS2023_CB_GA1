@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 namespace BISBB_SS2023_CB_GA1;
 
-class Enemy : AsciiShape, IRenderable {
+public class Enemy : AsciiShape, IRenderable {
     private World w;
     private (int x, int y)[] track;
     private int track_count;
