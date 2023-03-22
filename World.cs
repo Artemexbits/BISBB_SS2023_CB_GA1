@@ -86,7 +86,6 @@ public class World : IRenderable
             
             Console.SetCursorPosition(i, j);
             Console.Write(matrix[j, i]);
-            //colorizedOutput(i, j);
         }
         Console.ForegroundColor = ConsoleColor.White;
     }
